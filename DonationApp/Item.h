@@ -24,4 +24,6 @@
 
 @property (strong, nonatomic) User *user;
 
+- (NSDictionary *)formattedItem;
+
 @end

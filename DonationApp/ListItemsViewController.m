@@ -1,0 +1,82 @@
+//
+//  ListItemsViewController.m
+//  DonationApp
+//
+//  Created by Fernando Jinzenji on 2017-06-26.
+//  Copyright © 2017 Alex Lee. All rights reserved.
+//
+
+#import "ListItemsViewController.h"
+#import "Item.h"
+#import "ItemTableViewCell.h"
+
+@interface ListItemsViewController () <UITableViewDelegate, UITableViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSArray *itemsList;
+
+@end
+
+@implementation ListItemsViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    [self generateDataSource];
+}
+
+- (void)generateDataSource
+{
+    Item *item1 = [[Item alloc] init];
+    item1.title = @"Dinner table with 3 chairs";
+    item1.itemDescription = @"In pretty good conditions, by i missed a chair";
+    item1.category = @"Furniture";
+    
+    Item *item2 = [[Item alloc] init];
+    item2.title = @"iPhone 4s";
+    item2.itemDescription = @"Broken screen, no battery, no cables, button not working";
+    item2.category = @"Electronic";
+    
+    Item *item3 = [[Item alloc] init];
+    item3.title = @"A lot of baby girl clothes";
+    item3.itemDescription = @"My kid grew up and they don't fit him anymore";
+    item3.category = @"Clothing";
+    
+    Item *item4 = [[Item alloc] init];
+    item4.title = @"Old television";
+    item4.itemDescription = @"My grand-grandfather black and white tv can be useful for you";
+    item4.category = @"Electronic";
+    
+    Item *item5 = [[Item alloc] init];
+    item5.title = @"King bed with dirty mattress";
+    item5.itemDescription = @"I am moving next week and need to get rid of it";
+    item5.category = @"Furniture";
+    
+    self.itemsList = [[NSArray alloc] init];
+    self.itemsList = @[item1, item2, item3, item4, item5];
+}
+
+#pragma mark - TableView datasource and delegate methods
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.itemsList.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Item *currentItem = self.itemsList[indexPath.row];
+    
+    ItemTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"item-cell"];
+    cell.imageView.image = [UIImage imageNamed:@"placeholder"];
+    cell.titleLabel.text = currentItem.title;
+    cell.descriptionTextView.text = currentItem.itemDescription;
+    return cell;
+}
+
+@end
