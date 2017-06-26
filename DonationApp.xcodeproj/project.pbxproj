@@ -8,18 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		2A4159BFB7F0BB5CB61DA6CF /* Pods_DonationApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12EEC0A9957097DF9861FA7 /* Pods_DonationApp.framework */; };
-		4351B63A1F019922001804D5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4351B6391F019922001804D5 /* GoogleService-Info.plist */; };
 		43AD4F1D1F01928600D5FACC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AD4F1C1F01928600D5FACC /* main.m */; };
 		43AD4F201F01928600D5FACC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AD4F1F1F01928600D5FACC /* AppDelegate.m */; };
 		43AD4F231F01928600D5FACC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AD4F221F01928600D5FACC /* ViewController.m */; };
 		43AD4F261F01928600D5FACC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43AD4F241F01928600D5FACC /* Main.storyboard */; };
 		43AD4F281F01928600D5FACC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43AD4F271F01928600D5FACC /* Assets.xcassets */; };
 		43AD4F2B1F01928600D5FACC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43AD4F291F01928600D5FACC /* LaunchScreen.storyboard */; };
+		9C6D63D71F019C7200ED78F0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9C6D63D61F019C7200ED78F0 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		058D672DC9CA9927D7AAEF54 /* Pods-DonationApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DonationApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DonationApp/Pods-DonationApp.debug.xcconfig"; sourceTree = "<group>"; };
-		4351B6391F019922001804D5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		43AD4F181F01928600D5FACC /* DonationApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DonationApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43AD4F1C1F01928600D5FACC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		43AD4F1E1F01928600D5FACC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -30,6 +29,7 @@
 		43AD4F271F01928600D5FACC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		43AD4F2A1F01928600D5FACC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		43AD4F2C1F01928600D5FACC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9C6D63D61F019C7200ED78F0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A6C654A78E9F27A48CE9B1FB /* Pods-DonationApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DonationApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-DonationApp/Pods-DonationApp.release.xcconfig"; sourceTree = "<group>"; };
 		B12EEC0A9957097DF9861FA7 /* Pods_DonationApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DonationApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -84,7 +84,7 @@
 		43AD4F1A1F01928600D5FACC /* DonationApp */ = {
 			isa = PBXGroup;
 			children = (
-				4351B6391F019922001804D5 /* GoogleService-Info.plist */,
+				9C6D63D61F019C7200ED78F0 /* GoogleService-Info.plist */,
 				43AD4F1E1F01928600D5FACC /* AppDelegate.h */,
 				43AD4F1F1F01928600D5FACC /* AppDelegate.m */,
 				43AD4F211F01928600D5FACC /* ViewController.h */,
@@ -168,7 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43AD4F2B1F01928600D5FACC /* LaunchScreen.storyboard in Resources */,
-				4351B63A1F019922001804D5 /* GoogleService-Info.plist in Resources */,
+				9C6D63D71F019C7200ED78F0 /* GoogleService-Info.plist in Resources */,
 				43AD4F281F01928600D5FACC /* Assets.xcassets in Resources */,
 				43AD4F261F01928600D5FACC /* Main.storyboard in Resources */,
 			);
