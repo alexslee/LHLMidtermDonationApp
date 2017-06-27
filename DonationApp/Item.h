@@ -16,6 +16,8 @@
 
 @property (nonatomic, readonly, copy) NSString *title;
 
+@property (nonatomic, copy) NSString *itemTitle;
+
 @property (strong, nonatomic) UIImage *image;
 
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;

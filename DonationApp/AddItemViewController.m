@@ -65,7 +65,7 @@
 
 - (IBAction)saveButtonPressed:(UIBarButtonItem *)sender {
     Item *newItem = [[Item alloc] init];
-    newItem.title = self.titleTextField.text;
+    newItem.itemTitle = self.titleTextField.text;
     newItem.itemDescription = self.descriptionTextView.text;
     newItem.category = self.categoryTextField.text;
     

@@ -13,7 +13,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _title = @"test title";
+        _title = _itemTitle =  @"test title";
         self.itemDescription = @"test item description";
         self.category = @"testCategory";
         self.photos = [[NSMutableArray alloc] initWithArray:@[@"iphone7plus-model-select-201703.png"]];//@[@"/private/var/mobile/Media/DCIM/iphone7plus-model-select-201703.png"]];
@@ -28,6 +28,11 @@
              @"category":self.category,
              @"photos":self.photos
              };
+}
+
+- (void)setItemTitle:(NSString *)itemTitle
+{
+    _title = _itemTitle = itemTitle;
 }
 
 @end
