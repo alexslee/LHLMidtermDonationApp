@@ -11,6 +11,8 @@
 
 @interface ViewController ()
 
+@property (strong, nonatomic)FIRDatabaseReference *ref;
+
 @end
 
 @implementation ViewController
@@ -18,9 +20,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    FIRDatabaseReference *ref = [FIRDatabase database].reference;
+    self.ref = [FIRDatabase database].reference;
     User *testUser = [[User alloc] init];
-    [[ref child:@"users"] setValue:[testUser formattedUser]];
+    [self addUserToFirebase:testUser];
 }
 
 
@@ -29,5 +31,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (void)addUserToFirebase:(User *)user {
+    FIRDatabaseReference *childRef = [[self.ref child:@"users"] child:user.email];
+    [childRef setValue:[user formattedUser]];
+}
 
 @end

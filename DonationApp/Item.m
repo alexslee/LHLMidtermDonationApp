@@ -10,6 +10,24 @@
 
 @implementation Item
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _title = @"test title";
+        self.itemDescription = @"test item description";
+        self.category = @"testCategory";
+        self.photos = [[NSMutableArray alloc] initWithArray:@[@"iphone7plus-model-select-201703.png"]];//@[@"/private/var/mobile/Media/DCIM/iphone7plus-model-select-201703.png"]];
+    }
+    return self;
+}
 
+- (NSDictionary *)formattedItem {
+    return @{
+             @"title":self.title,
+             @"itemDescription":self.itemDescription,
+             @"category":self.category,
+             @"photos":self.photos
+             };
+}
 
 @end
