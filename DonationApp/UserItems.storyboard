@@ -96,7 +96,7 @@
                     <navigationItem key="navigationItem" title="My items for donation" id="uqI-Fl-yg8">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Eb7-Aq-mXN">
                             <connections>
-                                <segue destination="vLY-0I-IvR" kind="show" identifier="add-new-item" id="xAf-ER-9Xl"/>
+                                <segue destination="qxv-Sf-hEf" kind="show" identifier="add-new-item-segue" id="Utb-0E-prn"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -315,6 +315,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addPhotoButton" destination="0rB-bb-4P8" id="7ab-yM-Zcy"/>
                         <outlet property="categoryTextField" destination="X7F-Qs-4nC" id="giW-EH-E5y"/>
                         <outlet property="descriptionTextView" destination="VgI-tY-Hci" id="ZlC-RH-kHX"/>
                         <outlet property="image1" destination="ZVq-NP-eqU" id="dq8-3I-67S"/>
@@ -332,7 +333,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1132" y="-72.413793103448285"/>
+            <point key="canvasLocation" x="276" y="-72"/>
         </scene>
         <!--Select Category View Controller-->
         <scene sceneID="qvm-PL-nwj">
@@ -380,7 +381,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xoA-CE-Tu4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2008.8" y="-72.413793103448285"/>
+            <point key="canvasLocation" x="1244" y="-72"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ecz-xu-rgJ">
@@ -399,24 +400,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UnG-G5-Krd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1578.4000000000001" y="-72.413793103448285"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="HWd-xi-nNJ">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vLY-0I-IvR" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Nwb-8F-z6C">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="qxv-Sf-hEf" kind="relationship" relationship="rootViewController" id="9Id-oX-8hm"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gRz-Ij-NxC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="192.80000000000001" y="-72.413793103448285"/>
         </scene>
     </scenes>
     <resources>

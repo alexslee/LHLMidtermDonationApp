@@ -17,6 +17,6 @@
 
 @interface AddItemViewController : UIViewController
 
-@property (nonatomic, weak) id<AddItemViewControllerDelegate> delegate;
+@property (nonatomic, strong) id<AddItemViewControllerDelegate> delegate;
 
 @end

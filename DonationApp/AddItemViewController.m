@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "SelectCategoryViewController.h"
+#import "Item.h"
 
 @interface AddItemViewController () <SelectCategoryViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate>
 
@@ -21,11 +22,12 @@
 @property (weak, nonatomic) IBOutlet UIImageView *image3;
 @property (weak, nonatomic) IBOutlet UIView *photoMenuView;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet UIButton *addPhotoButton;
 
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLLocation *currentLocation;
-@property (nonatomic, assign) int imageCounter;
+@property (nonatomic, strong) NSMutableArray *photos;
 
 @end
 
@@ -53,12 +55,29 @@
 //    self.locationManager.allowsBackgroundLocationUpdates = YES;
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager requestLocation];
+    
+    // instantiate properties
+    self.photos = [[NSMutableArray alloc] init];
 
 }
 
 #pragma mark - Navigation
 
 - (IBAction)saveButtonPressed:(UIBarButtonItem *)sender {
+    Item *newItem = [[Item alloc] init];
+    newItem.title = self.titleTextField.text;
+    newItem.itemDescription = self.descriptionTextView.text;
+    newItem.category = self.categoryTextField.text;
+    
+    if(self.photos.count > 0)
+    {
+        newItem.photos = [[NSMutableArray alloc] init];
+        newItem.photos = self.photos;
+    }
+    newItem.location = self.currentLocation;
+    
+    [self.delegate didSaveNewItem:newItem];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (IBAction)addPhotoButtonPressed:(UIButton *)sender {
@@ -84,7 +103,6 @@
 - (IBAction)viewTapped:(UITapGestureRecognizer *)sender {
     [self.view endEditing:YES];
 }
-
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -120,25 +138,28 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    [self dismissViewControllerAnimated:NO completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     UIImage *selectedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     
-    switch (self.imageCounter) {
+    switch (self.photos.count) {
         case 0:
             self.image1.image = selectedImage;
-            self.imageCounter++;
             break;
         case 1:
             self.image2.image = selectedImage;
-            self.imageCounter++;
+            break;
         default:
             self.image3.image = selectedImage;
+            self.addPhotoButton.enabled = NO; // disable add button
             break;
     }
+    
+    // add image to photos array
+    [self.photos addObject:selectedImage];
     
     [self dismissViewControllerAnimated:NO completion:nil];
 }

@@ -9,8 +9,9 @@
 #import "ListItemsViewController.h"
 #import "Item.h"
 #import "ItemTableViewCell.h"
+#import "AddItemViewController.h"
 
-@interface ListItemsViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface ListItemsViewController () <UITableViewDelegate, UITableViewDataSource, AddItemViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *itemsList;
@@ -95,7 +96,7 @@
     // Create an array with items only from the current group/section
     NSMutableArray *filteredItemsList = [[NSMutableArray alloc] init];
     for (Item *item in self.itemsList) {
-        if(self.categoriesList[indexPath.section] == item.category)
+        if([self.categoriesList[indexPath.section] isEqualToString:item.category])
         {
             [filteredItemsList addObject:item];
         }
@@ -105,7 +106,15 @@
     Item *currentItem = filteredItemsList[indexPath.row];
     
     ItemTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"item-cell"];
-    cell.itemImageView.image = [UIImage imageNamed:@"placeholder"];
+    
+    if(currentItem.photos.count > 0)
+    {
+        cell.itemImageView.image = currentItem.photos[0];
+    }
+    else
+    {
+        cell.itemImageView.image = [UIImage imageNamed:@"placeholder"];
+    }
     cell.titleLabel.text = currentItem.title;
     cell.descriptionTextView.text = currentItem.itemDescription;
     return cell;
@@ -132,6 +141,25 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     return self.categoriesList[section];
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"add-new-item-segue"])
+    {
+        AddItemViewController *controller = (AddItemViewController *)segue.destinationViewController;
+        controller.delegate = self;
+    }
+}
+
+#pragma mark - AddItemViewControllerDelegate
+
+- (void)didSaveNewItem:(Item *)newItem
+{
+    [self.itemsList addObject:newItem];
+    [self.tableView reloadData];
 }
 
 @end
