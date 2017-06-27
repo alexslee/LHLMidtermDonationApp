@@ -22,6 +22,7 @@
 		9C6D63E81F01D30400ED78F0 /* ItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C6D63E71F01D30400ED78F0 /* ItemTableViewCell.m */; };
 		9C6D63EB1F01EEDA00ED78F0 /* AddItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C6D63EA1F01EEDA00ED78F0 /* AddItemViewController.m */; };
 		9C6D63EE1F01F09C00ED78F0 /* SelectCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C6D63ED1F01F09C00ED78F0 /* SelectCategoryViewController.m */; };
+		9C6D63F01F01FDB000ED78F0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C6D63EF1F01FDB000ED78F0 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		9C6D63EA1F01EEDA00ED78F0 /* AddItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddItemViewController.m; sourceTree = "<group>"; };
 		9C6D63EC1F01F09C00ED78F0 /* SelectCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectCategoryViewController.h; sourceTree = "<group>"; };
 		9C6D63ED1F01F09C00ED78F0 /* SelectCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectCategoryViewController.m; sourceTree = "<group>"; };
+		9C6D63EF1F01FDB000ED78F0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		A6C654A78E9F27A48CE9B1FB /* Pods-DonationApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DonationApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-DonationApp/Pods-DonationApp.release.xcconfig"; sourceTree = "<group>"; };
 		B12EEC0A9957097DF9861FA7 /* Pods_DonationApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DonationApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -59,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C6D63F01F01FDB000ED78F0 /* MapKit.framework in Frameworks */,
 				2A4159BFB7F0BB5CB61DA6CF /* Pods_DonationApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -78,6 +81,7 @@
 		3D082D610184B58EE925C48B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9C6D63EF1F01FDB000ED78F0 /* MapKit.framework */,
 				B12EEC0A9957097DF9861FA7 /* Pods_DonationApp.framework */,
 			);
 			name = Frameworks;
@@ -182,6 +186,11 @@
 					43AD4F171F01928600D5FACC = {
 						CreatedOnToolsVersion = 8.3.3;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};

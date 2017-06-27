@@ -176,6 +176,9 @@
                                 <state key="normal" title="+">
                                     <color key="titleShadowColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="addPhotoButtonPressed:" destination="qxv-Sf-hEf" eventType="touchUpInside" id="jD9-bU-5VP"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="ZVq-NP-eqU">
                                 <rect key="frame" x="104" y="360" width="80" height="80"/>
@@ -215,6 +218,51 @@
                                     <segue destination="SG8-5B-z0Z" kind="presentation" identifier="select-category-segue" id="SKA-Oc-w8i"/>
                                 </connections>
                             </button>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="q9K-Xe-g1R">
+                                <rect key="frame" x="16" y="481" width="343" height="180"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="180" id="wCv-iE-nDR"/>
+                                </constraints>
+                            </mapView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CjX-Rr-HsS">
+                                <rect key="frame" x="61" y="487" width="253" height="160"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6VM-YO-3vD">
+                                        <rect key="frame" x="68.5" y="62.5" width="115" height="35"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <state key="normal" title="Photo Library"/>
+                                        <connections>
+                                            <action selector="photoMenuButtonPressed:" destination="qxv-Sf-hEf" eventType="touchUpInside" id="5Ad-Pv-PWq"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jbz-td-8UZ">
+                                        <rect key="frame" x="92.5" y="9" width="67" height="35"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <state key="normal" title="Camera"/>
+                                        <connections>
+                                            <action selector="photoMenuButtonPressed:" destination="qxv-Sf-hEf" eventType="touchUpInside" id="NpT-yL-gC2"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uuy-fZ-SkD">
+                                        <rect key="frame" x="96.5" y="115.5" width="59" height="35"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="photoMenuButtonPressed:" destination="qxv-Sf-hEf" eventType="touchUpInside" id="ASH-BD-Mdj"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="96m-hM-4ie"/>
+                                    <constraint firstItem="6VM-YO-3vD" firstAttribute="top" secondItem="Jbz-td-8UZ" secondAttribute="bottom" constant="18" id="CSw-do-96J"/>
+                                    <constraint firstItem="Jbz-td-8UZ" firstAttribute="centerX" secondItem="CjX-Rr-HsS" secondAttribute="centerX" id="SYP-Ul-veI"/>
+                                    <constraint firstItem="Uuy-fZ-SkD" firstAttribute="centerX" secondItem="CjX-Rr-HsS" secondAttribute="centerX" id="Vfq-vC-m2g"/>
+                                    <constraint firstItem="Uuy-fZ-SkD" firstAttribute="top" secondItem="6VM-YO-3vD" secondAttribute="bottom" constant="18" id="kJb-lN-eas"/>
+                                    <constraint firstItem="6VM-YO-3vD" firstAttribute="centerX" secondItem="CjX-Rr-HsS" secondAttribute="centerX" id="luq-mp-Ma6"/>
+                                    <constraint firstItem="6VM-YO-3vD" firstAttribute="centerY" secondItem="CjX-Rr-HsS" secondAttribute="centerY" id="yLf-83-6Cl"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -230,6 +278,8 @@
                             <constraint firstItem="IOh-1D-itm" firstAttribute="top" secondItem="0rB-bb-4P8" secondAttribute="bottom" constant="16" id="IY8-qZ-1TA"/>
                             <constraint firstItem="0rB-bb-4P8" firstAttribute="leading" secondItem="iLq-ja-s22" secondAttribute="leadingMargin" id="KQQ-Ye-djp"/>
                             <constraint firstItem="XoZ-u4-O4S" firstAttribute="leading" secondItem="iLq-ja-s22" secondAttribute="leadingMargin" id="LhR-J7-1z6"/>
+                            <constraint firstItem="q9K-Xe-g1R" firstAttribute="top" secondItem="IOh-1D-itm" secondAttribute="bottom" constant="4" id="Ljm-Zw-xah"/>
+                            <constraint firstItem="CjX-Rr-HsS" firstAttribute="leading" secondItem="iLq-ja-s22" secondAttribute="leadingMargin" constant="45" id="MOm-Wo-k3w"/>
                             <constraint firstItem="WQx-oO-4A0" firstAttribute="top" secondItem="nDg-K8-lpN" secondAttribute="bottom" constant="4" id="NiE-nf-GwD"/>
                             <constraint firstItem="VgI-tY-Hci" firstAttribute="trailing" secondItem="iLq-ja-s22" secondAttribute="trailingMargin" id="Stg-3y-VNl"/>
                             <constraint firstItem="X7F-Qs-4nC" firstAttribute="leading" secondItem="iLq-ja-s22" secondAttribute="leadingMargin" id="Tyi-pF-MjK"/>
@@ -240,13 +290,17 @@
                             <constraint firstItem="BQZ-VU-Zq6" firstAttribute="leading" secondItem="iLq-ja-s22" secondAttribute="leadingMargin" id="WuT-5K-B9n"/>
                             <constraint firstItem="Ajz-ND-dxc" firstAttribute="leading" secondItem="X7F-Qs-4nC" secondAttribute="trailing" id="bCb-Pf-MVv"/>
                             <constraint firstItem="X7F-Qs-4nC" firstAttribute="top" secondItem="BQZ-VU-Zq6" secondAttribute="bottom" constant="4" id="bXZ-P9-q6m"/>
+                            <constraint firstItem="QRn-Je-9lV" firstAttribute="top" secondItem="CjX-Rr-HsS" secondAttribute="bottom" constant="20" id="cHz-Xp-0nu"/>
                             <constraint firstItem="VgI-tY-Hci" firstAttribute="leading" secondItem="iLq-ja-s22" secondAttribute="leadingMargin" id="cMW-Hc-lfK"/>
+                            <constraint firstItem="q9K-Xe-g1R" firstAttribute="trailing" secondItem="iLq-ja-s22" secondAttribute="trailingMargin" id="dBx-Oh-OLR"/>
                             <constraint firstItem="ZVq-NP-eqU" firstAttribute="top" secondItem="0rB-bb-4P8" secondAttribute="top" id="j5y-jC-k2N"/>
                             <constraint firstItem="EjD-XP-vMQ" firstAttribute="top" secondItem="ZVq-NP-eqU" secondAttribute="top" id="lYe-Xl-kma"/>
                             <constraint firstItem="VgI-tY-Hci" firstAttribute="top" secondItem="XoZ-u4-O4S" secondAttribute="bottom" constant="4" id="qEs-RW-6kZ"/>
                             <constraint firstItem="iMU-d4-9xw" firstAttribute="top" secondItem="EjD-XP-vMQ" secondAttribute="top" id="qFp-Lj-nka"/>
                             <constraint firstAttribute="trailing" secondItem="Ajz-ND-dxc" secondAttribute="trailing" constant="16" id="quu-bT-GKl"/>
                             <constraint firstItem="IFQ-wO-ncY" firstAttribute="leading" secondItem="iLq-ja-s22" secondAttribute="leadingMargin" id="vEv-B7-tWk"/>
+                            <constraint firstItem="q9K-Xe-g1R" firstAttribute="leading" secondItem="iLq-ja-s22" secondAttribute="leadingMargin" id="wYI-4A-pAU"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="CjX-Rr-HsS" secondAttribute="trailing" constant="45" id="y3N-eA-iI1"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Add Item" id="zcx-mk-yH1">
@@ -262,6 +316,8 @@
                         <outlet property="image1" destination="ZVq-NP-eqU" id="dq8-3I-67S"/>
                         <outlet property="image2" destination="EjD-XP-vMQ" id="7zI-HW-DTY"/>
                         <outlet property="image3" destination="iMU-d4-9xw" id="zfs-Lb-FLw"/>
+                        <outlet property="mapView" destination="q9K-Xe-g1R" id="IvY-uc-sx7"/>
+                        <outlet property="photoMenuView" destination="CjX-Rr-HsS" id="wGJ-X3-L3x"/>
                         <outlet property="titleTextField" destination="WQx-oO-4A0" id="xxk-wO-p29"/>
                     </connections>
                 </viewController>
