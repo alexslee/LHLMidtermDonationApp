@@ -10,8 +10,8 @@
 
 @interface ItemTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *itemImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @end

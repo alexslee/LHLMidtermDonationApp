@@ -13,7 +13,8 @@
 @interface ListItemsViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) NSArray *itemsList;
+@property (nonatomic, strong) NSMutableArray *itemsList;
+@property (nonatomic, strong) NSMutableArray *categoriesList;
 
 @end
 
@@ -52,31 +53,85 @@
     item5.itemDescription = @"I am moving next week and need to get rid of it";
     item5.category = @"Furniture";
     
-    self.itemsList = [[NSArray alloc] init];
-    self.itemsList = @[item1, item2, item3, item4, item5];
+    Item *item6 = [[Item alloc] init];
+    item6.title = @"Playstation 1";
+    item6.itemDescription = @"Only works upside down";
+    item6.category = @"Electronic";
+
+    
+    self.itemsList = [[NSMutableArray alloc] init];
+    self.itemsList = [NSMutableArray arrayWithArray:@[item1, item2, item3, item4, item5, item6]];
 }
 
 #pragma mark - TableView datasource and delegate methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    self.categoriesList = [[NSMutableArray alloc] init];
+    for (Item *item in self.itemsList) {
+        // array of subjects without duplicates
+        if(![self.categoriesList containsObject:item.category])
+            [self.categoriesList addObject:item.category];
+        
+    }
+    return self.categoriesList.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.itemsList.count;
+    int numberOfItems = 0;
+    
+    for (Item *item in self.itemsList) {
+        if ([item.category isEqualToString:self.categoriesList[section]])
+        {
+            numberOfItems++;
+        }
+    }
+    return numberOfItems;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Item *currentItem = self.itemsList[indexPath.row];
+    // Create an array with items only from the current group/section
+    NSMutableArray *filteredItemsList = [[NSMutableArray alloc] init];
+    for (Item *item in self.itemsList) {
+        if(self.categoriesList[indexPath.section] == item.category)
+        {
+            [filteredItemsList addObject:item];
+        }
+    }
+    
+    // Get item object from the filtered list
+    Item *currentItem = filteredItemsList[indexPath.row];
     
     ItemTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"item-cell"];
-    cell.imageView.image = [UIImage imageNamed:@"placeholder"];
+    cell.itemImageView.image = [UIImage imageNamed:@"placeholder"];
     cell.titleLabel.text = currentItem.title;
     cell.descriptionTextView.text = currentItem.itemDescription;
     return cell;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        [self.itemsList removeObjectAtIndex:indexPath.row];
+        
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+    }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return self.categoriesList[section];
 }
 
 @end
