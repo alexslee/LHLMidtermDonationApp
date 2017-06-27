@@ -10,6 +10,10 @@
 		2A4159BFB7F0BB5CB61DA6CF /* Pods_DonationApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12EEC0A9957097DF9861FA7 /* Pods_DonationApp.framework */; };
 		438CF0E01F01C26100A79300 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 438CF0DF1F01C26100A79300 /* User.m */; };
 		438CF0E31F01C2A000A79300 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 438CF0E21F01C2A000A79300 /* Item.m */; };
+		438CF0E51F01CEDE00A79300 /* ListItems.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 438CF0E41F01CEDE00A79300 /* ListItems.storyboard */; };
+		438CF0E81F01CF6600A79300 /* ShowAllItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438CF0E71F01CF6600A79300 /* ShowAllItemsViewController.m */; };
+		438CF0EB1F01CFB700A79300 /* ListItemsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 438CF0EA1F01CFB700A79300 /* ListItemsCollectionViewCell.m */; };
+		438CF0EE1F02DCF600A79300 /* ListItemDetailedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438CF0ED1F02DCF600A79300 /* ListItemDetailedViewController.m */; };
 		43AD4F1D1F01928600D5FACC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AD4F1C1F01928600D5FACC /* main.m */; };
 		43AD4F201F01928600D5FACC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AD4F1F1F01928600D5FACC /* AppDelegate.m */; };
 		43AD4F231F01928600D5FACC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AD4F221F01928600D5FACC /* ViewController.m */; };
@@ -25,6 +29,13 @@
 		438CF0DF1F01C26100A79300 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		438CF0E11F01C2A000A79300 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
 		438CF0E21F01C2A000A79300 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
+		438CF0E41F01CEDE00A79300 /* ListItems.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ListItems.storyboard; sourceTree = "<group>"; };
+		438CF0E61F01CF6600A79300 /* ShowAllItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowAllItemsViewController.h; sourceTree = "<group>"; };
+		438CF0E71F01CF6600A79300 /* ShowAllItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowAllItemsViewController.m; sourceTree = "<group>"; };
+		438CF0E91F01CFB700A79300 /* ListItemsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListItemsCollectionViewCell.h; sourceTree = "<group>"; };
+		438CF0EA1F01CFB700A79300 /* ListItemsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListItemsCollectionViewCell.m; sourceTree = "<group>"; };
+		438CF0EC1F02DCF600A79300 /* ListItemDetailedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListItemDetailedViewController.h; sourceTree = "<group>"; };
+		438CF0ED1F02DCF600A79300 /* ListItemDetailedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListItemDetailedViewController.m; sourceTree = "<group>"; };
 		43AD4F181F01928600D5FACC /* DonationApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DonationApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43AD4F1C1F01928600D5FACC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		43AD4F1E1F01928600D5FACC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -104,6 +115,13 @@
 				438CF0DF1F01C26100A79300 /* User.m */,
 				438CF0E11F01C2A000A79300 /* Item.h */,
 				438CF0E21F01C2A000A79300 /* Item.m */,
+				438CF0E41F01CEDE00A79300 /* ListItems.storyboard */,
+				438CF0EC1F02DCF600A79300 /* ListItemDetailedViewController.h */,
+				438CF0ED1F02DCF600A79300 /* ListItemDetailedViewController.m */,
+				438CF0E61F01CF6600A79300 /* ShowAllItemsViewController.h */,
+				438CF0E71F01CF6600A79300 /* ShowAllItemsViewController.m */,
+				438CF0E91F01CFB700A79300 /* ListItemsCollectionViewCell.h */,
+				438CF0EA1F01CFB700A79300 /* ListItemsCollectionViewCell.m */,
 			);
 			path = DonationApp;
 			sourceTree = "<group>";
@@ -180,6 +198,7 @@
 				43AD4F2B1F01928600D5FACC /* LaunchScreen.storyboard in Resources */,
 				9C6D63D71F019C7200ED78F0 /* GoogleService-Info.plist in Resources */,
 				43AD4F281F01928600D5FACC /* Assets.xcassets in Resources */,
+				438CF0E51F01CEDE00A79300 /* ListItems.storyboard in Resources */,
 				43AD4F261F01928600D5FACC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -239,7 +258,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				438CF0EB1F01CFB700A79300 /* ListItemsCollectionViewCell.m in Sources */,
 				438CF0E31F01C2A000A79300 /* Item.m in Sources */,
+				438CF0EE1F02DCF600A79300 /* ListItemDetailedViewController.m in Sources */,
+				438CF0E81F01CF6600A79300 /* ShowAllItemsViewController.m in Sources */,
 				438CF0E01F01C26100A79300 /* User.m in Sources */,
 				43AD4F231F01928600D5FACC /* ViewController.m in Sources */,
 				43AD4F201F01928600D5FACC /* AppDelegate.m in Sources */,

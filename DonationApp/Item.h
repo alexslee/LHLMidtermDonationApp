@@ -7,12 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "User.h"
 
-@interface Item : NSObject
+@interface Item : NSObject <MKAnnotation>
 
-@property (strong, nonatomic) NSString *title;
+@property (nonatomic, readonly, copy) NSString *title;
+
+@property (strong, nonatomic) UIImage *image;
+
+@property (nonatomic, assign) CLLocationCoordinate2D coordinate;
 
 @property (strong, nonatomic) NSString *itemDescription;
 
@@ -23,5 +29,7 @@
 @property (strong, nonatomic) CLLocation *location;
 
 @property (strong, nonatomic) User *user;
+
+- (NSDictionary *)formattedItem;
 
 @end
