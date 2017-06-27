@@ -25,6 +25,7 @@
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLLocation *currentLocation;
+@property (nonatomic, assign) int imageCounter;
 
 @end
 
@@ -32,10 +33,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // setup textfields/textview
+    self.descriptionTextView.layer.borderWidth = 1;
+    self.descriptionTextView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.descriptionTextView.layer.cornerRadius = 5.0f;
 
     // setup image picker
     self.imagePicker = [[UIImagePickerController alloc] init];
     self.imagePicker.delegate = self;
+    
+    // setup photo menu
+    self.photoMenuView.layer.cornerRadius = 10.0f;
+    self.photoMenuView.alpha = 0.9;
     
     // setup location manager
     self.locationManager = [[CLLocationManager alloc] init];
@@ -62,12 +72,17 @@
         self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
         [self presentViewController:self.imagePicker animated:YES completion:nil];
     }
-    else if([sender.currentTitle isEqual:@"Photo Library"])
+    else if([sender.currentTitle isEqual:@"Photo Librar"])
     {
         self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         [self presentViewController:self.imagePicker animated:YES completion:nil];
     }
+
     self.photoMenuView.hidden = YES;
+}
+
+- (IBAction)viewTapped:(UITapGestureRecognizer *)sender {
+    [self.view endEditing:YES];
 }
 
 
@@ -111,7 +126,20 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     UIImage *selectedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-    self.image1.image = selectedImage;
+    
+    switch (self.imageCounter) {
+        case 0:
+            self.image1.image = selectedImage;
+            self.imageCounter++;
+            break;
+        case 1:
+            self.image2.image = selectedImage;
+            self.imageCounter++;
+        default:
+            self.image3.image = selectedImage;
+            break;
+    }
+    
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 
