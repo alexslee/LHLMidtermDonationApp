@@ -20,6 +20,8 @@
 		9C6D63E11F01CF5700ED78F0 /* UserItems.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C6D63E01F01CF5700ED78F0 /* UserItems.storyboard */; };
 		9C6D63E41F01CF9F00ED78F0 /* ListItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C6D63E31F01CF9F00ED78F0 /* ListItemsViewController.m */; };
 		9C6D63E81F01D30400ED78F0 /* ItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C6D63E71F01D30400ED78F0 /* ItemTableViewCell.m */; };
+		9C6D63EB1F01EEDA00ED78F0 /* AddItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C6D63EA1F01EEDA00ED78F0 /* AddItemViewController.m */; };
+		9C6D63EE1F01F09C00ED78F0 /* SelectCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C6D63ED1F01F09C00ED78F0 /* SelectCategoryViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,10 @@
 		9C6D63E31F01CF9F00ED78F0 /* ListItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListItemsViewController.m; sourceTree = "<group>"; };
 		9C6D63E61F01D30400ED78F0 /* ItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemTableViewCell.h; sourceTree = "<group>"; };
 		9C6D63E71F01D30400ED78F0 /* ItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemTableViewCell.m; sourceTree = "<group>"; };
+		9C6D63E91F01EEDA00ED78F0 /* AddItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddItemViewController.h; sourceTree = "<group>"; };
+		9C6D63EA1F01EEDA00ED78F0 /* AddItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddItemViewController.m; sourceTree = "<group>"; };
+		9C6D63EC1F01F09C00ED78F0 /* SelectCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectCategoryViewController.h; sourceTree = "<group>"; };
+		9C6D63ED1F01F09C00ED78F0 /* SelectCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectCategoryViewController.m; sourceTree = "<group>"; };
 		A6C654A78E9F27A48CE9B1FB /* Pods-DonationApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DonationApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-DonationApp/Pods-DonationApp.release.xcconfig"; sourceTree = "<group>"; };
 		B12EEC0A9957097DF9861FA7 /* Pods_DonationApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DonationApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -133,6 +139,10 @@
 				9C6D63E71F01D30400ED78F0 /* ItemTableViewCell.m */,
 				9C6D63E21F01CF9F00ED78F0 /* ListItemsViewController.h */,
 				9C6D63E31F01CF9F00ED78F0 /* ListItemsViewController.m */,
+				9C6D63E91F01EEDA00ED78F0 /* AddItemViewController.h */,
+				9C6D63EA1F01EEDA00ED78F0 /* AddItemViewController.m */,
+				9C6D63EC1F01F09C00ED78F0 /* SelectCategoryViewController.h */,
+				9C6D63ED1F01F09C00ED78F0 /* SelectCategoryViewController.m */,
 			);
 			name = UserItems;
 			sourceTree = "<group>";
@@ -262,11 +272,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				438CF0E31F01C2A000A79300 /* Item.m in Sources */,
+				9C6D63EB1F01EEDA00ED78F0 /* AddItemViewController.m in Sources */,
 				9C6D63E41F01CF9F00ED78F0 /* ListItemsViewController.m in Sources */,
 				438CF0E01F01C26100A79300 /* User.m in Sources */,
 				43AD4F231F01928600D5FACC /* ViewController.m in Sources */,
 				43AD4F201F01928600D5FACC /* AppDelegate.m in Sources */,
 				9C6D63E81F01D30400ED78F0 /* ItemTableViewCell.m in Sources */,
+				9C6D63EE1F01F09C00ED78F0 /* SelectCategoryViewController.m in Sources */,
 				43AD4F1D1F01928600D5FACC /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
