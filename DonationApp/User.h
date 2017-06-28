@@ -7,8 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Item.h"
 
 @interface User : NSObject
+
+@property (strong, nonatomic) NSString *key;
 
 @property (strong, nonatomic) NSString *name;
 
@@ -18,7 +21,7 @@
 
 @property (strong, nonatomic) NSString *phoneNumber;
 
-@property (strong, nonatomic) NSMutableArray *listOfItems;
+@property (strong, nonatomic) NSMutableArray<Item *> *listOfItems;
 
 - (NSDictionary *)formattedUser;
 

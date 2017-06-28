@@ -13,21 +13,20 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _title = _itemTitle =  @"test title";
-        self.itemDescription = @"test item description";
-        self.category = @"testCategory";
-        self.photos = [[NSMutableArray alloc] initWithArray:@[@"iphone7plus-model-select-201703.png"]];//@[@"/private/var/mobile/Media/DCIM/iphone7plus-model-select-201703.png"]];
+        self.photos = [[NSMutableArray alloc] init];
+        self.photosURL = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
 - (NSDictionary *)formattedItem {
-    return @{
+    NSDictionary *returnDict = @{
              @"title":self.title,
              @"itemDescription":self.itemDescription,
              @"category":self.category,
-             @"photos":self.photos
+             @"photos":self.photosURL
              };
+    return returnDict;
 }
 
 - (void)setItemTitle:(NSString *)itemTitle

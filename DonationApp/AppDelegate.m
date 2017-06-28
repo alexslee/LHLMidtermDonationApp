@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 @import Firebase;
+#import <FirebaseDatabase/FirebaseDatabase.h>
+
+
 @interface AppDelegate ()
 
 @end
@@ -18,6 +21,47 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [FIRApp configure]; //initializing connection to Firebase
+    
+    // should get that from firebase after login. harcoded for now
+    self.currentUser = [[User alloc] init];
+    self.currentUser.key = @"-KngmyMc4ElruRjBqyRk";
+    self.currentUser.name = @"John Doe";
+    self.currentUser.email = @"johndoe@lighthouselabs.ca";
+    self.currentUser.phoneNumber = @"604-100-1234";
+    
+    Item *item1 = [[Item alloc] init];
+    item1.itemTitle = @"Dinner table with 3 chairs";
+    item1.itemDescription = @"In pretty good conditions, by i missed a chair";
+    item1.category = @"Furniture";
+    
+    Item *item2 = [[Item alloc] init];
+    item2.itemTitle = @"iPhone 4s";
+    item2.itemDescription = @"Broken screen, no battery, no cables, button not working";
+    item2.category = @"Electronic";
+    
+    Item *item3 = [[Item alloc] init];
+    item3.itemTitle = @"A lot of baby girl clothes";
+    item3.itemDescription = @"My kid grew up and they don't fit him anymore";
+    item3.category = @"Clothing";
+    
+    Item *item4 = [[Item alloc] init];
+    item4.itemTitle = @"Old television";
+    item4.itemDescription = @"My grand-grandfather black and white tv can be useful for you";
+    item4.category = @"Electronic";
+    
+    Item *item5 = [[Item alloc] init];
+    item5.itemTitle = @"King bed with dirty mattress";
+    item5.itemDescription = @"I am moving next week and need to get rid of it";
+    item5.category = @"Furniture";
+    
+    Item *item6 = [[Item alloc] init];
+    item6.itemTitle = @"Playstation 1";
+    item6.itemDescription = @"Only works upside down";
+    item6.category = @"Electronic";
+    
+//    self.currentUser.listOfItems = [[NSMutableArray alloc] init];
+//    self.currentUser.listOfItems = [NSMutableArray arrayWithArray:@[item1, item2, item3, item4, item5, item6]];
+
     return YES;
 }
 

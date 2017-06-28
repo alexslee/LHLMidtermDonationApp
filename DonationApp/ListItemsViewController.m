@@ -10,12 +10,17 @@
 #import "Item.h"
 #import "ItemTableViewCell.h"
 #import "AddItemViewController.h"
+#import "AppDelegate.h"
+#import <FirebaseDatabase/FirebaseDatabase.h>
+#import <FirebaseStorage/FirebaseStorage.h>
 
 @interface ListItemsViewController () <UITableViewDelegate, UITableViewDataSource, AddItemViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *itemsList;
 @property (nonatomic, strong) NSMutableArray *categoriesList;
+@property (strong, nonatomic) FIRDatabaseReference *ref;
+@property (nonatomic, strong) User *currentUser;
 
 @end
 
@@ -24,44 +29,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self generateDataSource];
-}
-
-- (void)generateDataSource
-{
-    Item *item1 = [[Item alloc] init];
-    item1.itemTitle = @"Dinner table with 3 chairs";
-    item1.itemDescription = @"In pretty good conditions, by i missed a chair";
-    item1.category = @"Furniture";
-    
-    Item *item2 = [[Item alloc] init];
-    item2.itemTitle = @"iPhone 4s";
-    item2.itemDescription = @"Broken screen, no battery, no cables, button not working";
-    item2.category = @"Electronic";
-    
-    Item *item3 = [[Item alloc] init];
-    item3.itemTitle = @"A lot of baby girl clothes";
-    item3.itemDescription = @"My kid grew up and they don't fit him anymore";
-    item3.category = @"Clothing";
-    
-    Item *item4 = [[Item alloc] init];
-    item4.itemTitle = @"Old television";
-    item4.itemDescription = @"My grand-grandfather black and white tv can be useful for you";
-    item4.category = @"Electronic";
-    
-    Item *item5 = [[Item alloc] init];
-    item5.itemTitle = @"King bed with dirty mattress";
-    item5.itemDescription = @"I am moving next week and need to get rid of it";
-    item5.category = @"Furniture";
-    
-    Item *item6 = [[Item alloc] init];
-    item6.itemTitle = @"Playstation 1";
-    item6.itemDescription = @"Only works upside down";
-    item6.category = @"Electronic";
-
-    
-    self.itemsList = [[NSMutableArray alloc] init];
-    self.itemsList = [NSMutableArray arrayWithArray:@[item1, item2, item3, item4, item5, item6]];
+    // Get items from current user
+    self.currentUser = [(AppDelegate *)[[UIApplication sharedApplication] delegate] currentUser];
+    self.itemsList = self.currentUser.listOfItems;
 }
 
 #pragma mark - TableView datasource and delegate methods
@@ -158,8 +128,65 @@
 
 - (void)didSaveNewItem:(Item *)newItem
 {
+    self.ref = [FIRDatabase database].reference;
+    
+    //set item for currentuser
+    FIRDatabaseReference *usersRef = [self.ref child:@"users"];
+    FIRDatabaseReference *userRef = [usersRef child:self.currentUser.key];
+    [self.currentUser.listOfItems addObject:newItem];
+    [userRef setValue:[self.currentUser formattedUser]];
+    
+    //save item to firebase
+    FIRDatabaseReference *itemsRef = [self.ref child:@"items"];
+    FIRDatabaseReference *itemRef = [itemsRef childByAutoId];
+    newItem.userEmail = self.currentUser.email;
+    [itemRef setValue:[newItem formattedItem]];
+    
+    //storage images and set urls to download
+    FIRStorageReference *storageRef = [[FIRStorage storage] reference];
+    FIRStorageMetadata *metaData = [[FIRStorageMetadata alloc] init];
+    metaData.contentType = @"image/png";
+    
+    for (int i = 0; i < newItem.photos.count; i++) {
+        NSString *childKey = [NSString stringWithFormat:@"%@_%i", itemRef.key, i];
+        FIRStorageReference *imagesRef = [storageRef child:childKey];
+        NSData *photoData = UIImagePNGRepresentation([self reducePhotoSize:newItem.photos[i]]);
+        [imagesRef putData:photoData
+                  metadata:metaData
+                completion:^(FIRStorageMetadata *metadata, NSError *error) {
+                    if (error != nil) {
+                        // Uh-oh, an error occurred!
+                    } else {
+                        // Metadata contains file metadata such as size, content-type, and download URL.
+                        [newItem.photosURL addObject:metadata.downloadURL.absoluteString];
+
+                        // Update data in items and user
+                        [itemRef setValue:[newItem formattedItem]];
+                        [userRef setValue:[self.currentUser formattedUser]];
+                    }
+                }];
+    }
+    
     [self.itemsList addObject:newItem];
     [self.tableView reloadData];
+}
+
+- (UIImage *)reducePhotoSize:(UIImage *)normalPhoto
+{
+    UIImage *reducedPhoto = nil;
+    CGSize targetSize = CGSizeMake(normalPhoto.size.width*0.2, normalPhoto.size.height*0.2);
+    UIGraphicsBeginImageContext(targetSize);
+    
+    CGRect thumbnailRect = CGRectMake(0, 0, 0, 0);
+    thumbnailRect.origin = CGPointMake(0.0,0.0);
+    thumbnailRect.size.width  = targetSize.width;
+    thumbnailRect.size.height = targetSize.height;
+    
+    [normalPhoto drawInRect:thumbnailRect];
+    
+    reducedPhoto = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return reducedPhoto;
 }
 
 @end

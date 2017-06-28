@@ -68,15 +68,10 @@
     newItem.itemTitle = self.titleTextField.text;
     newItem.itemDescription = self.descriptionTextView.text;
     newItem.category = self.categoryTextField.text;
-    
-    if(self.photos.count > 0)
-    {
-        newItem.photos = [[NSMutableArray alloc] init];
-        newItem.photos = self.photos;
-    }
     newItem.location = self.currentLocation;
-    
+    newItem.photos = self.photos;
     [self.delegate didSaveNewItem:newItem];
+    
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -91,7 +86,7 @@
         self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
         [self presentViewController:self.imagePicker animated:YES completion:nil];
     }
-    else if([sender.currentTitle isEqual:@"Photo Librar"])
+    else if([sender.currentTitle isEqual:@"Photo Library"])
     {
         self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         [self presentViewController:self.imagePicker animated:YES completion:nil];

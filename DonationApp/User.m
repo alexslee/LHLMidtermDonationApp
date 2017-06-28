@@ -13,22 +13,30 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.name = @"testUser";
-        self.password = @"testPass";
-        self.email = @"testMail";
-        self.phoneNumber = @"testNum";
-        self.listOfItems = [[NSMutableArray alloc] initWithArray:@[@"testitem1",@"testitem2"]];
+        self.listOfItems = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
 - (NSDictionary *)formattedUser {
-    return @{@"name":self.name,
+    NSDictionary *returnDict =
+            @{@"name":self.name,
              @"email":self.email,
-             @"password":self.password,
              @"phoneNumber":self.phoneNumber,
-             @"listofItems":self.listOfItems
+             @"listofItems":[self formatArrayOfItens]
              };
+    return returnDict;
+}
+
+- (NSMutableArray *)formatArrayOfItens
+{
+    NSMutableArray *returnArray = [[NSMutableArray alloc] init];
+    
+    for (int i = 0; i < self.listOfItems.count; i++) {
+        [returnArray addObject:[self.listOfItems[i] formattedItem]];
+    }
+    
+    return returnArray;
 }
 
 @end
