@@ -121,7 +121,12 @@
         CLLocationCoordinate2D startLocationCoordinate = self.currentLocation.coordinate;
         MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(startLocationCoordinate, regionRadius*2, regionRadius*2);
         [self.mapView setRegion:region];
-
+        
+        MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+        point.coordinate = self.currentLocation.coordinate;
+        point.title = @"Current Location";
+        
+        [self.mapView addAnnotation:point];
     }
 }
 
