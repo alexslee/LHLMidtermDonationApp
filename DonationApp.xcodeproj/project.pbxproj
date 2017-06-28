@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2A4159BFB7F0BB5CB61DA6CF /* Pods_DonationApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12EEC0A9957097DF9861FA7 /* Pods_DonationApp.framework */; };
+		43713D061F03142A00F93808 /* WelcomeScreens.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43713D051F03142A00F93808 /* WelcomeScreens.storyboard */; };
+		438AD8B01F03172500CE5E20 /* WelcomeOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438AD8AF1F03172500CE5E20 /* WelcomeOnboarding.swift */; };
 		438CF0E01F01C26100A79300 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 438CF0DF1F01C26100A79300 /* User.m */; };
 		438CF0E31F01C2A000A79300 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 438CF0E21F01C2A000A79300 /* Item.m */; };
 		438CF0E51F01CEDE00A79300 /* ListItems.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 438CF0E41F01CEDE00A79300 /* ListItems.storyboard */; };
@@ -31,6 +33,8 @@
 
 /* Begin PBXFileReference section */
 		058D672DC9CA9927D7AAEF54 /* Pods-DonationApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DonationApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DonationApp/Pods-DonationApp.debug.xcconfig"; sourceTree = "<group>"; };
+		43713D051F03142A00F93808 /* WelcomeScreens.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WelcomeScreens.storyboard; sourceTree = "<group>"; };
+		438AD8AF1F03172500CE5E20 /* WelcomeOnboarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeOnboarding.swift; sourceTree = "<group>"; };
 		438CF0DE1F01C26100A79300 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		438CF0DF1F01C26100A79300 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		438CF0E11F01C2A000A79300 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
@@ -98,6 +102,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		43713D041F03141600F93808 /* Welcome Screens */ = {
+			isa = PBXGroup;
+			children = (
+				43713D051F03142A00F93808 /* WelcomeScreens.storyboard */,
+				438AD8AF1F03172500CE5E20 /* WelcomeOnboarding.swift */,
+			);
+			name = "Welcome Screens";
+			sourceTree = "<group>";
+		};
 		43AD4F0F1F01928600D5FACC = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +132,7 @@
 		43AD4F1A1F01928600D5FACC /* DonationApp */ = {
 			isa = PBXGroup;
 			children = (
+				43713D041F03141600F93808 /* Welcome Screens */,
 				9C6D63D61F019C7200ED78F0 /* GoogleService-Info.plist */,
 				43AD4F1E1F01928600D5FACC /* AppDelegate.h */,
 				43AD4F1F1F01928600D5FACC /* AppDelegate.m */,
@@ -204,6 +218,7 @@
 					43AD4F171F01928600D5FACC = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = FJL385PM79;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
@@ -236,6 +251,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43713D061F03142A00F93808 /* WelcomeScreens.storyboard in Resources */,
 				43AD4F2B1F01928600D5FACC /* LaunchScreen.storyboard in Resources */,
 				9C6D63D71F019C7200ED78F0 /* GoogleService-Info.plist in Resources */,
 				43AD4F281F01928600D5FACC /* Assets.xcassets in Resources */,
@@ -304,6 +320,7 @@
 				438CF0E31F01C2A000A79300 /* Item.m in Sources */,
 				9C6D63EB1F01EEDA00ED78F0 /* AddItemViewController.m in Sources */,
 				9C6D63E41F01CF9F00ED78F0 /* ListItemsViewController.m in Sources */,
+				438AD8B01F03172500CE5E20 /* WelcomeOnboarding.swift in Sources */,
 				438CF0EE1F02DCF600A79300 /* ListItemDetailedViewController.m in Sources */,
 				438CF0E81F01CF6600A79300 /* ShowAllItemsViewController.m in Sources */,
 				438CF0E01F01C26100A79300 /* User.m in Sources */,
@@ -434,11 +451,14 @@
 			baseConfigurationReference = 058D672DC9CA9927D7AAEF54 /* Pods-DonationApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = FJL385PM79;
 				INFOPLIST_FILE = DonationApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.alexlee.DonationApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -447,11 +467,13 @@
 			baseConfigurationReference = A6C654A78E9F27A48CE9B1FB /* Pods-DonationApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = FJL385PM79;
 				INFOPLIST_FILE = DonationApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.alexlee.DonationApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

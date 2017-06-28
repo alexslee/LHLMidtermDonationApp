@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F34722D2B816207423E96AB478A78A7A"
-               BuildableName = "Pods_DonationApp.framework"
-               BlueprintName = "Pods-DonationApp"
+               BlueprintIdentifier = "738B2050D3EE6CEF2F8FC5020EAB44A1"
+               BuildableName = "paper_onboarding.framework"
+               BlueprintName = "paper-onboarding"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F34722D2B816207423E96AB478A78A7A"
-            BuildableName = "Pods_DonationApp.framework"
-            BlueprintName = "Pods-DonationApp"
+            BlueprintIdentifier = "738B2050D3EE6CEF2F8FC5020EAB44A1"
+            BuildableName = "paper_onboarding.framework"
+            BlueprintName = "paper-onboarding"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
