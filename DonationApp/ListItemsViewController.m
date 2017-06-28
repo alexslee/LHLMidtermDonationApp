@@ -132,6 +132,7 @@
     
     //set item for currentuser
     FIRDatabaseReference *usersRef = [self.ref child:@"users"];
+    NSLog(@"%@", usersRef.URL);
     FIRDatabaseReference *userRef = [usersRef child:self.currentUser.key];
     [self.currentUser.listOfItems addObject:newItem];
     [userRef setValue:[self.currentUser formattedUser]];
@@ -167,7 +168,6 @@
                 }];
     }
     
-    [self.itemsList addObject:newItem];
     [self.tableView reloadData];
 }
 
