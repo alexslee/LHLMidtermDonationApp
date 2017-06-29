@@ -29,7 +29,9 @@
              @"title":self.title,
              @"itemDescription":self.itemDescription,
              @"category":self.category,
-             @"photos":self.photosURL
+             @"photos":self.photosURL,
+             @"latitude":[NSNumber numberWithDouble: self.location.coordinate.latitude],
+             @"longitude":[NSNumber numberWithDouble: self.location.coordinate.longitude],
              };
     return returnDict;
 }
@@ -38,6 +40,12 @@
 {
     _title = itemTitle;
     _itemTitle = itemTitle;
+}
+
+- (void)setLocation:(CLLocation *)location
+{
+    _location = location;
+    _coordinate = location.coordinate;
 }
 
 @end

@@ -12,10 +12,12 @@
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) NSMutableArray *itemsToDisplay;
+@property (strong, nonatomic) NSMutableDictionary *items;
 @property (strong, nonatomic) PHFetchResult *assetFetchResults;
 @property (strong, nonatomic) MKMapView *mapView;
 @property (strong, nonatomic) UIBarButtonItem *buttonItem;
 @property (strong, nonatomic) Item *detailItemToDisplay;
+//@property (strong, nonatomic) NSMutableSet *categoriesList;
 
 @end
 
@@ -24,27 +26,48 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    Item *itemOne = [[Item alloc] init];
-    Item *itemTwo = [[Item alloc] init];
-
-    FIRDatabaseReference *ref = [FIRDatabase database].reference;
-    FIRDatabaseReference *itemsRef = [ref child:@"items"];
-    [[itemsRef child:@"itemOne"] setValue:[itemOne formattedItem]];
-    [[itemsRef child:@"itemTwo"] setValue:[itemTwo formattedItem]];
-    PHFetchOptions *allPhotosOptions = [[PHFetchOptions alloc] init];
-    allPhotosOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
-    self.assetFetchResults = [PHAsset fetchAssetsWithOptions:allPhotosOptions];
+    self.itemsToDisplay = [[NSMutableArray alloc] init];
+    self.items = [[NSMutableDictionary alloc] init];
+    //self.categoriesList = [[NSMutableOrderedSet alloc] init];
+    FIRDatabaseReference *rootReference = [FIRDatabase database].reference;
+    FIRDatabaseReference *itemsReference = [rootReference child:@"items"];
     
-    itemOne.coordinate = CLLocationCoordinate2DMake(49.2820, -123.1171);
-    itemTwo.coordinate = CLLocationCoordinate2DMake(49.520, -123.1171);
-    //itemOne.image = [self.assetFetchResults lastObject];
-    //itemTwo.image = [self.assetFetchResults lastObject];
-    
-    self.itemsToDisplay = [[NSMutableArray alloc] initWithObjects:itemOne, itemTwo, nil];
+    [itemsReference observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        NSDictionary *itemsDictionary = snapshot.value;
+        for (NSString *key in itemsDictionary.allKeys) {
+            
+            NSDictionary *itemDict = [itemsDictionary objectForKey:key];
+            Item *item = [[Item alloc] init];
+            item.itemTitle = [itemDict objectForKey:@"title"];
+            item.itemDescription = [itemDict objectForKey:@"itemDescription"];
+            item.category = [itemDict objectForKey:@"category"];
+            NSArray *photoURLs = [itemDict objectForKey:@"photos"];
+            item.photosURL = [NSMutableArray arrayWithArray:photoURLs];
+            NSNumber *latitude = [itemDict objectForKey:@"latitude"];
+            NSNumber *longitude = [itemDict objectForKey:@"longitude"];
+            item.coordinate = CLLocationCoordinate2DMake([latitude floatValue], [longitude floatValue]);
+            //if ([item.photosURL count] == 0) {
+                [item.photos addObject:[UIImage imageNamed:@"placeholder"]];
+                item.image = item.photos[0];
+            //}
+            
+            if ([self.items objectForKey:item.category] == nil) {
+                //if the item's category doesn't exist yet, create a new key-value pair in the items dictionary to display
+                [self.items setObject:[[NSMutableArray alloc] init] forKey:item.category];
+            }
+            
+            [[self.items objectForKey:item.category] addObject:item];
+            
+            [self.itemsToDisplay addObject:item];
+            [self.collectionView reloadData];
+            [self downloadItemImages];
+            [self configureMapView];
+        }
+    }];
     
     self.mapView = [[MKMapView alloc] initWithFrame:CGRectZero];
     
-    [self configureMapView];
+    
     
     self.buttonItem = [[UIBarButtonItem alloc] initWithTitle:@"Map View" style:UIBarButtonItemStylePlain target:self action:@selector(toggleMapView:)];
     self.navigationItem.rightBarButtonItem = self.buttonItem;
@@ -72,6 +95,22 @@
     }
 }
 
+- (void)downloadItemImages {
+    
+    for (Item* item in self.itemsToDisplay) {
+        NSArray *photoURLs = item.photosURL;
+        if ([photoURLs count] > 0) {
+            [item.photos removeObjectAtIndex:0];
+            NSString *url = photoURLs[0];
+            NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: url]];
+            [item.photos addObject:[UIImage imageWithData: imageData]];
+            item.image = item.photos[0];
+            [self.collectionView reloadData];
+        }
+    }
+    
+    //[self.collectionView reloadData];
+}
 
 #pragma mark - map view methods
 
@@ -113,9 +152,11 @@
     top.active = YES;
     width.active = YES;
     height.active = YES;
-    [self.mapView addAnnotations:self.itemsToDisplay];
     self.mapView.delegate = self;
     self.mapView.hidden = YES;
+    if ([self.itemsToDisplay count] > 0) {
+        [self.mapView addAnnotations:self.itemsToDisplay];
+    }
     
 }
 
@@ -126,72 +167,65 @@
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
     view.canShowCallout = YES;
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    //[view addSubview:imageView];
-    Item *annotation = (Item *)view;
-    view.leftCalloutAccessoryView = imageView;
-    imageView.image = annotation.image;
-    
-    CGRect frame = view.frame;
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
-    imageView.layer.masksToBounds = YES;
-    imageView.frame = CGRectMake(-frame.size.width/2, -frame.size.height-7, frame.size.height, frame.size.height);
+//    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+//    //[view addSubview:imageView];
+//    
+//    Item *annotation = view.annotation;
+//    
+//    view.leftCalloutAccessoryView = imageView;
+//    imageView.image = annotation.image;
+//
+//    CGRect frame = view.frame;
+//    imageView.contentMode = UIViewContentModeScaleAspectFill;
+//    imageView.layer.masksToBounds = YES;
+//    imageView.frame = CGRectMake(-frame.size.width/2, -frame.size.height-7, frame.size.height, frame.size.height);
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    Item *itemAnnotation = (Item *)annotation;
+    MKAnnotationView *returner = [[MKAnnotationView alloc] init];
+    returner.image = itemAnnotation.image;
+    return returner;
 }
 
 #pragma mark - collection view methods
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
+    return [[self.items allKeys] count];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 2;
+    NSString *sectionName = [[self.items allKeys] objectAtIndex:section];
+    return [[self.items objectForKey:sectionName] count];
 }
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    UICollectionReusableView *reusable = nil;
+    if (kind == UICollectionElementKindSectionHeader) {
+        HeaderCollectionReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header" forIndexPath:indexPath];
+        header.sectionLabel.text = [[self.items allKeys] objectAtIndex:indexPath.section];
+        reusable = header;
+    }
+    return reusable;
+}
+
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ListItemsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-    Item *toDisplay = [self.itemsToDisplay objectAtIndex:indexPath.row];
+    NSArray *sections = [self.items allKeys];
+    NSString *section = [sections objectAtIndex:indexPath.section];
+    Item *toDisplay = [[self.items objectForKey:section] objectAtIndex:indexPath.row];
     if (toDisplay) {
-        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus authorizationStatus) {
-            if (authorizationStatus == PHAuthorizationStatusAuthorized) {
-                Item* item = [self.itemsToDisplay objectAtIndex:indexPath.row];
-                cell.imageView.image = item.image;
-                NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-                NSString *documentsPath = [paths objectAtIndex:0]; //Get the docs directory
-                NSString *filePath = [documentsPath stringByAppendingPathComponent:toDisplay.photos[0]]; //Add the file name
-                NSData *pngData = [NSData dataWithContentsOfFile:filePath];
-                UIImage *image = [UIImage imageWithData:pngData];
-                cell.imageView.image = image;//[UIImage imageWithContentsOfFile:toDisplay.photos[0]];
-                cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
-                cell.imageView.layer.masksToBounds = YES;
-                //
-                PHAsset *asset = [self.assetFetchResults lastObject];
-                //cell.backgroundColor = [UIColor clearColor];
-                
-                PHImageRequestOptions *options = [PHImageRequestOptions new];
-                options.resizeMode = PHImageRequestOptionsResizeModeFast;
-                options.deliveryMode = PHImageRequestOptionsDeliveryModeOpportunistic;
-                options.version = PHImageRequestOptionsVersionCurrent;
-                options.synchronous = NO;
-                
-                CGFloat scale = MIN(2.0, [[UIScreen mainScreen] scale]);
-                CGSize requestImageSize = CGSizeMake(CGRectGetWidth(cell.bounds) * scale, CGRectGetHeight(cell.bounds) * scale);
-                [[PHCachingImageManager defaultManager] requestImageForAsset:asset
-                                                                  targetSize:requestImageSize
-                                                                 contentMode:PHImageContentModeAspectFit
-                                                                     options:options
-                                                               resultHandler:^(UIImage *result, NSDictionary *info) {
-                                                                   item.image = result;
-                                                                   cell.imageView.image = result;
-                                                               }];
-            }
-        }];
+        cell.imageView.image = toDisplay.photos[0];
     }
+    
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    self.detailItemToDisplay = [self.itemsToDisplay objectAtIndex:indexPath.row];
+    NSString *sectionName = [[self.items allKeys] objectAtIndex:indexPath.section];
+    self.detailItemToDisplay = [[self.items objectForKey:sectionName] objectAtIndex:indexPath.row];
+    //[self.itemsToDisplay objectAtIndex:indexPath.row];
     [self performSegueWithIdentifier:@"toDetailedItemSegue" sender:self];
 }
 

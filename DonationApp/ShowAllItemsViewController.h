@@ -12,6 +12,7 @@
 #import "Item.h"
 #import "ListItemsCollectionViewCell.h"
 #import "ListItemDetailedViewController.h"
+#import "HeaderCollectionReusableView.h"
 @interface ShowAllItemsViewController : UIViewController
 
 @end
