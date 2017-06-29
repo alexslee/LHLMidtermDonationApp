@@ -101,17 +101,17 @@
 
 - (void)downloadItemImages {
     
-    for (Item* item in self.itemsToDisplay) {
-        NSArray *photoURLs = item.photosURL;
-        if ([photoURLs count] > 0) {
-            [item.photos removeObjectAtIndex:0];
-            NSString *url = photoURLs[0];
-            NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: url]];
-            [item.photos addObject:[UIImage imageWithData: imageData]];
-            item.image = item.photos[0];
-            [self.collectionView reloadData];
-        }
-    }
+//    for (Item* item in self.itemsToDisplay) {
+//        NSArray *photoURLs = item.photosURL;
+//        if ([photoURLs count] > 0) {
+//            [item.photos removeObjectAtIndex:0];
+//            NSString *url = photoURLs[0];
+//            NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: url]];
+//            [item.photos addObject:[UIImage imageWithData: imageData]];
+//            item.image = item.photos[0];
+//            [self.collectionView reloadData];
+//        }
+//    }
     
     //[self.collectionView reloadData];
 }
@@ -204,6 +204,35 @@
     return returner;
 }
 
+#pragma mark - Helper
+
+- (void)downloadImage:(NSString *)imageURL
+    completionHandler:(void (^)(UIImage * image))completionHandler
+{
+    NSURL *url = [NSURL URLWithString:imageURL];
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+    
+    NSURLSessionDownloadTask *downloadTask = [session downloadTaskWithURL:url completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        if (error)
+        {
+            NSLog(@"error: %@", error.localizedDescription);
+            return;
+        }
+        
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            NSData *data = [NSData dataWithContentsOfURL:location];
+            UIImage * photoImage = [UIImage imageWithData:data];
+            completionHandler(photoImage);
+        }];
+        
+    }];
+    
+    [downloadTask resume];
+}
+
 #pragma mark - collection view methods
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -232,7 +261,41 @@
     NSString *section = [sections objectAtIndex:indexPath.section];
     Item *toDisplay = [[self.items objectForKey:section] objectAtIndex:indexPath.row];
     if (toDisplay) {
-        cell.imageView.image = toDisplay.photos[0];
+        cell.titleLabel.text = toDisplay.title;
+        
+        if (toDisplay.photosURL.count > 0)
+        {
+            UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithFrame:CGRectZero];
+            spinner.translatesAutoresizingMaskIntoConstraints = NO;
+            spinner.color = [UIColor lightGrayColor];
+            [spinner startAnimating];
+            [cell.imageView addSubview:spinner];
+            
+            [NSLayoutConstraint constraintWithItem:spinner
+                                         attribute:NSLayoutAttributeCenterX
+                                         relatedBy:NSLayoutRelationEqual
+                                            toItem:cell.imageView
+                                         attribute:NSLayoutAttributeCenterX
+                                        multiplier:1
+                                          constant:0].active = YES;
+            
+            [NSLayoutConstraint constraintWithItem:spinner
+                                         attribute:NSLayoutAttributeCenterY
+                                         relatedBy:NSLayoutRelationEqual
+                                            toItem:cell.imageView
+                                         attribute:NSLayoutAttributeCenterY
+                                        multiplier:1
+                                          constant:0].active = YES;
+            
+            [self downloadImage:toDisplay.photosURL[0] completionHandler:^(UIImage *image) {
+                cell.imageView.image = image;
+                [spinner stopAnimating];
+            }];
+        }
+        else
+        {
+            cell.imageView.image = [UIImage imageNamed:@"placeholder"];
+        }
     }
     
     return cell;

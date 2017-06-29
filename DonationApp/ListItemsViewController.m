@@ -85,8 +85,6 @@
     }
     else if (currentItem.photosURL.count >0)
     {
-        cell.itemImageView.image = [UIImage imageNamed:@"placeholder"];
-        
         UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithFrame:CGRectZero];
         spinner.translatesAutoresizingMaskIntoConstraints = NO;
         spinner.color = [UIColor lightGrayColor];
