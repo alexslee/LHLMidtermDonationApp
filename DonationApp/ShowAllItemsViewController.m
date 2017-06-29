@@ -43,9 +43,13 @@
             item.category = [itemDict objectForKey:@"category"];
             NSArray *photoURLs = [itemDict objectForKey:@"photos"];
             item.photosURL = [NSMutableArray arrayWithArray:photoURLs];
-            if ([item.photosURL count] == 0) {
+            NSNumber *latitude = [itemDict objectForKey:@"latitude"];
+            NSNumber *longitude = [itemDict objectForKey:@"longitude"];
+            item.coordinate = CLLocationCoordinate2DMake([latitude floatValue], [longitude floatValue]);
+            //if ([item.photosURL count] == 0) {
                 [item.photos addObject:[UIImage imageNamed:@"placeholder"]];
-            }
+                item.image = item.photos[0];
+            //}
             
             if ([self.items objectForKey:item.category] == nil) {
                 //if the item's category doesn't exist yet, create a new key-value pair in the items dictionary to display
@@ -55,6 +59,7 @@
             [[self.items objectForKey:item.category] addObject:item];
             
             [self.itemsToDisplay addObject:item];
+            [self.collectionView reloadData];
             [self downloadItemImages];
             [self configureMapView];
         }
@@ -95,12 +100,15 @@
     for (Item* item in self.itemsToDisplay) {
         NSArray *photoURLs = item.photosURL;
         if ([photoURLs count] > 0) {
+            [item.photos removeObjectAtIndex:0];
             NSString *url = photoURLs[0];
             NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: url]];
             [item.photos addObject:[UIImage imageWithData: imageData]];
+            item.image = item.photos[0];
             [self.collectionView reloadData];
         }
     }
+    
     //[self.collectionView reloadData];
 }
 
@@ -144,11 +152,11 @@
     top.active = YES;
     width.active = YES;
     height.active = YES;
+    self.mapView.delegate = self;
+    self.mapView.hidden = YES;
     if ([self.itemsToDisplay count] > 0) {
         [self.mapView addAnnotations:self.itemsToDisplay];
     }
-    self.mapView.delegate = self;
-    self.mapView.hidden = YES;
     
 }
 
@@ -159,16 +167,25 @@
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
     view.canShowCallout = YES;
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    //[view addSubview:imageView];
-    Item *annotation = (Item *)view;
-    view.leftCalloutAccessoryView = imageView;
-    imageView.image = annotation.image;
-    
-    CGRect frame = view.frame;
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
-    imageView.layer.masksToBounds = YES;
-    imageView.frame = CGRectMake(-frame.size.width/2, -frame.size.height-7, frame.size.height, frame.size.height);
+//    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+//    //[view addSubview:imageView];
+//    
+//    Item *annotation = view.annotation;
+//    
+//    view.leftCalloutAccessoryView = imageView;
+//    imageView.image = annotation.image;
+//
+//    CGRect frame = view.frame;
+//    imageView.contentMode = UIViewContentModeScaleAspectFill;
+//    imageView.layer.masksToBounds = YES;
+//    imageView.frame = CGRectMake(-frame.size.width/2, -frame.size.height-7, frame.size.height, frame.size.height);
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    Item *itemAnnotation = (Item *)annotation;
+    MKAnnotationView *returner = [[MKAnnotationView alloc] init];
+    returner.image = itemAnnotation.image;
+    return returner;
 }
 
 #pragma mark - collection view methods
