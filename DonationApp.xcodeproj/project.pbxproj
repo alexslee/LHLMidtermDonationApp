@@ -145,31 +145,15 @@
 		43AD4F1A1F01928600D5FACC /* DonationApp */ = {
 			isa = PBXGroup;
 			children = (
+				9C8B34911F04E8B8004FD738 /* Model Classes */,
 				43713D041F03141600F93808 /* Welcome Screens */,
-				9C6D63D61F019C7200ED78F0 /* GoogleService-Info.plist */,
+				9C6D63E51F01CFA400ED78F0 /* UserItems */,
+				9C8B34901F04E897004FD738 /* ListItems */,
+				43AD4F1B1F01928600D5FACC /* Supporting Files */,
 				43AD4F1E1F01928600D5FACC /* AppDelegate.h */,
 				43AD4F1F1F01928600D5FACC /* AppDelegate.m */,
-				43AD4F211F01928600D5FACC /* ViewController.h */,
-				43AD4F221F01928600D5FACC /* ViewController.m */,
-				43AD4F241F01928600D5FACC /* Main.storyboard */,
-				43AD4F271F01928600D5FACC /* Assets.xcassets */,
-				43AD4F291F01928600D5FACC /* LaunchScreen.storyboard */,
 				43AD4F2C1F01928600D5FACC /* Info.plist */,
-				43AD4F1B1F01928600D5FACC /* Supporting Files */,
-				438CF0DE1F01C26100A79300 /* User.h */,
-				438CF0DF1F01C26100A79300 /* User.m */,
-				438CF0E11F01C2A000A79300 /* Item.h */,
-				438CF0E21F01C2A000A79300 /* Item.m */,
-				9C6D63E51F01CFA400ED78F0 /* UserItems */,
-				438CF0E41F01CEDE00A79300 /* ListItems.storyboard */,
-				4334B29B1F049FB1002970EA /* HeaderCollectionReusableView.h */,
-				4334B29C1F049FB1002970EA /* HeaderCollectionReusableView.m */,
-				438CF0EC1F02DCF600A79300 /* ListItemDetailedViewController.h */,
-				438CF0ED1F02DCF600A79300 /* ListItemDetailedViewController.m */,
-				438CF0E61F01CF6600A79300 /* ShowAllItemsViewController.h */,
-				438CF0E71F01CF6600A79300 /* ShowAllItemsViewController.m */,
-				438CF0E91F01CFB700A79300 /* ListItemsCollectionViewCell.h */,
-				438CF0EA1F01CFB700A79300 /* ListItemsCollectionViewCell.m */,
+				9C6D63D61F019C7200ED78F0 /* GoogleService-Info.plist */,
 			);
 			path = DonationApp;
 			sourceTree = "<group>";
@@ -177,6 +161,11 @@
 		43AD4F1B1F01928600D5FACC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				43AD4F211F01928600D5FACC /* ViewController.h */,
+				43AD4F221F01928600D5FACC /* ViewController.m */,
+				43AD4F241F01928600D5FACC /* Main.storyboard */,
+				43AD4F271F01928600D5FACC /* Assets.xcassets */,
+				43AD4F291F01928600D5FACC /* LaunchScreen.storyboard */,
 				43AD4F1C1F01928600D5FACC /* main.m */,
 			);
 			name = "Supporting Files";
@@ -196,6 +185,33 @@
 				9C6D63ED1F01F09C00ED78F0 /* SelectCategoryViewController.m */,
 			);
 			name = UserItems;
+			sourceTree = "<group>";
+		};
+		9C8B34901F04E897004FD738 /* ListItems */ = {
+			isa = PBXGroup;
+			children = (
+				438CF0E41F01CEDE00A79300 /* ListItems.storyboard */,
+				4334B29B1F049FB1002970EA /* HeaderCollectionReusableView.h */,
+				4334B29C1F049FB1002970EA /* HeaderCollectionReusableView.m */,
+				438CF0EC1F02DCF600A79300 /* ListItemDetailedViewController.h */,
+				438CF0ED1F02DCF600A79300 /* ListItemDetailedViewController.m */,
+				438CF0E61F01CF6600A79300 /* ShowAllItemsViewController.h */,
+				438CF0E71F01CF6600A79300 /* ShowAllItemsViewController.m */,
+				438CF0E91F01CFB700A79300 /* ListItemsCollectionViewCell.h */,
+				438CF0EA1F01CFB700A79300 /* ListItemsCollectionViewCell.m */,
+			);
+			name = ListItems;
+			sourceTree = "<group>";
+		};
+		9C8B34911F04E8B8004FD738 /* Model Classes */ = {
+			isa = PBXGroup;
+			children = (
+				438CF0DE1F01C26100A79300 /* User.h */,
+				438CF0DF1F01C26100A79300 /* User.m */,
+				438CF0E11F01C2A000A79300 /* Item.h */,
+				438CF0E21F01C2A000A79300 /* Item.m */,
+			);
+			name = "Model Classes";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

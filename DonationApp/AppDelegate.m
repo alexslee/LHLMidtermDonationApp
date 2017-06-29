@@ -34,6 +34,9 @@
     if(userKey != nil)
     {
         self.currentUser.key = userKey;
+        
+        //TODO - get user from firebase
+        
         mainStoryboard = [UIStoryboard storyboardWithName:@"UserItems" bundle:nil];
     }
     else
