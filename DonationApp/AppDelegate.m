@@ -34,6 +34,40 @@
     if(userKey != nil)
     {
         self.currentUser.key = userKey;
+        FIRDatabaseReference *rootReference = [FIRDatabase database].reference;
+        FIRDatabaseReference *usersReference = [rootReference child:@"users"];
+        FIRDatabaseReference *userReference = [usersReference child:userKey];
+        [userReference observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+            NSDictionary *userInfoDictionary = snapshot.value;
+            
+            //for (NSString *key in userInfoDictionary) {
+                //NSDictionary *user = [usersDictionary objectForKey:key];
+                self.currentUser.name = [userInfoDictionary objectForKey:@"name"];
+                self.currentUser.phoneNumber = [userInfoDictionary objectForKey:@"phoneNumber"];
+                self.currentUser.email = [userInfoDictionary objectForKey:@"email"];
+                NSArray *userItems = [userInfoDictionary objectForKey:@"listofItems"];
+                NSMutableArray *itemsForUser = [[NSMutableArray alloc] init];
+                for (NSDictionary *userItem in userItems) {
+                    Item *item = [[Item alloc] init];
+                    item.category = [userItem objectForKey:@"category"];
+                    item.itemDescription = [userItem objectForKey:@"itemDescription"];
+                    item.itemTitle = [userItem objectForKey:@"title"];
+                    NSNumber *latitude = [userItem objectForKey:@"latitude"];
+                    NSNumber *longitude = [userItem objectForKey:@"longitude"];
+                    item.location = [[CLLocation alloc] initWithLatitude:[latitude floatValue] longitude:[longitude floatValue]];
+                    item.userName = [userItem objectForKey:@"name"];
+                    item.userEmail = [userItem objectForKey:@"email"];
+                    item.userPhoneNum = [userItem objectForKey:@"phone"];
+                    NSArray *photos = [userItem objectForKey:@"photos"];
+                    item.photosURL = [NSMutableArray arrayWithArray:photos];
+                    [itemsForUser addObject:item];
+                }
+                
+                self.currentUser.listOfItems = [NSMutableArray arrayWithArray:itemsForUser];
+                
+            //}
+            
+        }];
         
         //TODO - get user from firebase
         
