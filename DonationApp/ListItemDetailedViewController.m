@@ -24,6 +24,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    UIBarButtonItem *contactButton = [[UIBarButtonItem alloc] initWithTitle:@"Contact" style:UIBarButtonItemStylePlain target:self action:@selector(contactPressed:)];
+    contactButton.tintColor = [UIColor greenColor];
+    self.navigationItem.rightBarButtonItem = contactButton;
     [self configureView];
 }
 
@@ -41,17 +44,15 @@
     self.itemTitleLabel.text = self.item.title;
     self.itemDescriptionLabel.text = self.item.itemDescription;
 }
-
+/*
 - (IBAction)backPressed:(UIButton *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
+*/
 - (IBAction)contactPressed:(UIButton *)sender {
     NSString *userInfoString = [NSString stringWithFormat:@"Here's the owner's contact info:\nName: %@\nPhone Number: %@\nEmail: %@",self.item.userName,self.item.userPhoneNum,self.item.userEmail];
     UIAlertController *contactInfo = [UIAlertController alertControllerWithTitle:@"Contact the owner" message:userInfoString preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
     [contactInfo addAction:okAction];
     [self presentViewController:contactInfo animated:YES completion:nil];
 }

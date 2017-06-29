@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Rp8-R1-awT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Rp8-R1-awT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -219,7 +219,7 @@
                                 </constraints>
                             </mapView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CjX-Rr-HsS">
-                                <rect key="frame" x="61" y="487" width="253" height="160"/>
+                                <rect key="frame" x="61" y="438" width="253" height="160"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6VM-YO-3vD">
                                         <rect key="frame" x="68.5" y="62.5" width="115" height="35"/>
@@ -538,39 +538,12 @@
                                     <constraint firstItem="x17-vf-mqG" firstAttribute="centerX" secondItem="gjJ-dV-4qw" secondAttribute="centerX" id="x8Z-2c-KYO"/>
                                 </constraints>
                             </scrollView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="pNT-fe-lo8">
-                                <rect key="frame" x="0.0" y="587" width="375" height="80"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XXW-h3-aFH">
-                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="80"/>
-                                        <state key="normal" title="Back">
-                                            <color key="titleColor" red="0.85043728350000003" green="0.21816034619999999" blue="0.15920260550000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="backPressed:" destination="J4r-T6-7Ex" eventType="touchUpInside" id="ETW-cg-Fiq"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nMO-mc-Bqf">
-                                        <rect key="frame" x="187.5" y="0.0" width="187.5" height="80"/>
-                                        <state key="normal" title="Contact">
-                                            <color key="titleColor" red="0.1819814891" green="0.69426733259999995" blue="0.53024792669999998" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="contactPressed:" destination="J4r-T6-7Ex" eventType="touchUpInside" id="MNQ-p0-dB4"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="gjJ-dV-4qw" secondAttribute="trailing" id="2I5-O9-C2f"/>
                             <constraint firstItem="gjJ-dV-4qw" firstAttribute="top" secondItem="Omo-F8-cRC" secondAttribute="bottom" id="ELC-Fu-I6o"/>
                             <constraint firstItem="gjJ-dV-4qw" firstAttribute="height" secondItem="QcM-AP-l6H" secondAttribute="height" multiplier="0.85" id="W7k-aL-Yz6"/>
-                            <constraint firstAttribute="trailing" secondItem="pNT-fe-lo8" secondAttribute="trailing" id="Wiu-cc-ey6"/>
-                            <constraint firstItem="pNT-fe-lo8" firstAttribute="top" secondItem="gjJ-dV-4qw" secondAttribute="bottom" id="aOF-5Y-Yw5"/>
-                            <constraint firstItem="AEF-Z7-ikk" firstAttribute="top" secondItem="pNT-fe-lo8" secondAttribute="bottom" id="blf-i6-qcy"/>
-                            <constraint firstItem="pNT-fe-lo8" firstAttribute="leading" secondItem="QcM-AP-l6H" secondAttribute="leading" id="esi-cV-HOa"/>
                             <constraint firstItem="gjJ-dV-4qw" firstAttribute="leading" secondItem="QcM-AP-l6H" secondAttribute="leading" id="geY-FR-mXh"/>
                         </constraints>
                     </view>
@@ -624,7 +597,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ListItems" width="16" height="16"/>
+        <image name="ListItems" width="25" height="25"/>
         <image name="placeholder" width="420" height="420"/>
     </resources>
 </document>
