@@ -23,6 +23,7 @@
             @{@"name":self.name,
              @"email":self.email,
              @"phoneNumber":self.phoneNumber,
+             @"password":self.password,
              @"listofItems":[self formatArrayOfItens]
              };
     return returnDict;

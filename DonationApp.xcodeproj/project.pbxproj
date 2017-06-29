@@ -23,6 +23,7 @@
 		43AD4F261F01928600D5FACC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43AD4F241F01928600D5FACC /* Main.storyboard */; };
 		43AD4F281F01928600D5FACC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43AD4F271F01928600D5FACC /* Assets.xcassets */; };
 		43AD4F2B1F01928600D5FACC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43AD4F291F01928600D5FACC /* LaunchScreen.storyboard */; };
+		9C67F0071F0585B300EB4044 /* Loading.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C67F0061F0585B300EB4044 /* Loading.storyboard */; };
 		9C6D63D71F019C7200ED78F0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9C6D63D61F019C7200ED78F0 /* GoogleService-Info.plist */; };
 		9C6D63E11F01CF5700ED78F0 /* UserItems.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C6D63E01F01CF5700ED78F0 /* UserItems.storyboard */; };
 		9C6D63E41F01CF9F00ED78F0 /* ListItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C6D63E31F01CF9F00ED78F0 /* ListItemsViewController.m */; };
@@ -61,6 +62,7 @@
 		43AD4F271F01928600D5FACC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		43AD4F2A1F01928600D5FACC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		43AD4F2C1F01928600D5FACC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9C67F0061F0585B300EB4044 /* Loading.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Loading.storyboard; sourceTree = "<group>"; };
 		9C6D63D61F019C7200ED78F0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9C6D63E01F01CF5700ED78F0 /* UserItems.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserItems.storyboard; sourceTree = "<group>"; };
 		9C6D63E21F01CF9F00ED78F0 /* ListItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListItemsViewController.h; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				9C6D63E01F01CF5700ED78F0 /* UserItems.storyboard */,
+				9C67F0061F0585B300EB4044 /* Loading.storyboard */,
 				9C6D63E61F01D30400ED78F0 /* ItemTableViewCell.h */,
 				9C6D63E71F01D30400ED78F0 /* ItemTableViewCell.m */,
 				9C6D63E21F01CF9F00ED78F0 /* ListItemsViewController.h */,
@@ -281,6 +284,7 @@
 				438CF0E51F01CEDE00A79300 /* ListItems.storyboard in Resources */,
 				43AD4F261F01928600D5FACC /* Main.storyboard in Resources */,
 				9C6D63E11F01CF5700ED78F0 /* UserItems.storyboard in Resources */,
+				9C67F0071F0585B300EB4044 /* Loading.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
