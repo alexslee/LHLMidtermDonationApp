@@ -28,10 +28,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    // Get items from current user
+    
+    self.currentUser = [[User alloc] init];
     self.currentUser = [(AppDelegate *)[[UIApplication sharedApplication] delegate] currentUser];
     self.itemsList = self.currentUser.listOfItems;
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
 }
 
 #pragma mark - TableView datasource and delegate methods
