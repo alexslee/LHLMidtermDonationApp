@@ -304,7 +304,17 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSString *sectionName = [[self.items allKeys] objectAtIndex:indexPath.section];
     self.detailItemToDisplay = [[self.items objectForKey:sectionName] objectAtIndex:indexPath.row];
-    //[self.itemsToDisplay objectAtIndex:indexPath.row];
+    
+    NSArray *photoURLs = self.detailItemToDisplay.photosURL;
+    if ([photoURLs count] > 0 && self.detailItemToDisplay.photos.count < self.detailItemToDisplay.photosURL.count) {
+        [self.detailItemToDisplay.photos removeObjectAtIndex:0];
+        for (NSString *url in photoURLs) {
+            NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: url]];
+            [self.detailItemToDisplay.photos addObject:[UIImage imageWithData: imageData]];
+        }
+    }
+
+    
     [self performSegueWithIdentifier:@"toDetailedItemSegue" sender:self];
 }
 
