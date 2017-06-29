@@ -45,6 +45,7 @@
             self.currentUser.name = [userInfoDictionary objectForKey:@"name"];
             self.currentUser.phoneNumber = [userInfoDictionary objectForKey:@"phoneNumber"];
             self.currentUser.email = [userInfoDictionary objectForKey:@"email"];
+            self.currentUser.password = [userInfoDictionary objectForKey:@"password"];
             NSArray *userItems = [userInfoDictionary objectForKey:@"listofItems"];
             NSMutableArray *itemsForUser = [[NSMutableArray alloc] init];
             for (NSDictionary *userItem in userItems) {
