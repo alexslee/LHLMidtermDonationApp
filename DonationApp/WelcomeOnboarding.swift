@@ -17,7 +17,6 @@ class WelcomeOnboardingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        skipButton.isHidden = true
         configureOnboarding()
     }
     
@@ -46,6 +45,7 @@ class WelcomeOnboardingViewController: UIViewController {
             view.addConstraint(constraint)
         }
         
+        view.bringSubview(toFront: skipButton)
     }
         
 }
@@ -53,10 +53,10 @@ class WelcomeOnboardingViewController: UIViewController {
 // MARK: PaperOnboardingDelegate
 extension WelcomeOnboardingViewController: PaperOnboardingDelegate {
 
-    func onboardingWillTransitonToIndex(_ index: Int) {
-        skipButton.isHidden = index >= 1 ? false : true
-    }
-    
+//    func onboardingWillTransitonToIndex(_ index: Int) {
+//        skipButton.isHidden = index >= 1 ? false : false
+//    }
+//    
     func onboardingDidTransitonToIndex(_ index: Int) {
         
     }
