@@ -14,6 +14,8 @@
 
 @interface AppDelegate ()
 
+@property (nonatomic) UIStoryboard *mainStoryboard;
+
 @end
 
 @implementation AppDelegate
@@ -26,7 +28,7 @@
     
     // init - check if the app has a userkey to skip tutorial and login pages
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    UIStoryboard *mainStoryboard = nil;
+    self.mainStoryboard = nil;
     UIViewController *rootController;
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -40,45 +42,45 @@
         [userReference observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
             NSDictionary *userInfoDictionary = snapshot.value;
             
-            //for (NSString *key in userInfoDictionary) {
-                //NSDictionary *user = [usersDictionary objectForKey:key];
-                self.currentUser.name = [userInfoDictionary objectForKey:@"name"];
-                self.currentUser.phoneNumber = [userInfoDictionary objectForKey:@"phoneNumber"];
-                self.currentUser.email = [userInfoDictionary objectForKey:@"email"];
-                NSArray *userItems = [userInfoDictionary objectForKey:@"listofItems"];
-                NSMutableArray *itemsForUser = [[NSMutableArray alloc] init];
-                for (NSDictionary *userItem in userItems) {
-                    Item *item = [[Item alloc] init];
-                    item.category = [userItem objectForKey:@"category"];
-                    item.itemDescription = [userItem objectForKey:@"itemDescription"];
-                    item.itemTitle = [userItem objectForKey:@"title"];
-                    NSNumber *latitude = [userItem objectForKey:@"latitude"];
-                    NSNumber *longitude = [userItem objectForKey:@"longitude"];
-                    item.location = [[CLLocation alloc] initWithLatitude:[latitude floatValue] longitude:[longitude floatValue]];
-                    item.userName = [userItem objectForKey:@"name"];
-                    item.userEmail = [userItem objectForKey:@"email"];
-                    item.userPhoneNum = [userItem objectForKey:@"phone"];
-                    NSArray *photos = [userItem objectForKey:@"photos"];
-                    item.photosURL = [NSMutableArray arrayWithArray:photos];
-                    [itemsForUser addObject:item];
-                }
-                
-                self.currentUser.listOfItems = [NSMutableArray arrayWithArray:itemsForUser];
-                
-            //}
+            self.currentUser.name = [userInfoDictionary objectForKey:@"name"];
+            self.currentUser.phoneNumber = [userInfoDictionary objectForKey:@"phoneNumber"];
+            self.currentUser.email = [userInfoDictionary objectForKey:@"email"];
+            NSArray *userItems = [userInfoDictionary objectForKey:@"listofItems"];
+            NSMutableArray *itemsForUser = [[NSMutableArray alloc] init];
+            for (NSDictionary *userItem in userItems) {
+                Item *item = [[Item alloc] init];
+                item.category = [userItem objectForKey:@"category"];
+                item.itemDescription = [userItem objectForKey:@"itemDescription"];
+                item.itemTitle = [userItem objectForKey:@"title"];
+                NSNumber *latitude = [userItem objectForKey:@"latitude"];
+                NSNumber *longitude = [userItem objectForKey:@"longitude"];
+                item.location = [[CLLocation alloc] initWithLatitude:[latitude floatValue] longitude:[longitude floatValue]];
+                item.userName = [userItem objectForKey:@"name"];
+                item.userEmail = [userItem objectForKey:@"email"];
+                item.userPhoneNum = [userItem objectForKey:@"phone"];
+                NSArray *photos = [userItem objectForKey:@"photos"];
+                item.photosURL = [NSMutableArray arrayWithArray:photos];
+                [itemsForUser addObject:item];
+            }
+            self.currentUser.listOfItems = [NSMutableArray arrayWithArray:itemsForUser];
             
+            self.mainStoryboard = [UIStoryboard storyboardWithName:@"UserItems" bundle:nil];
+            UIViewController *rootController2 = [self.mainStoryboard instantiateInitialViewController];
+            self.window.rootViewController = rootController2;
+            [self.window makeKeyAndVisible];
+
         }];
         
         //TODO - get user from firebase
         
-        mainStoryboard = [UIStoryboard storyboardWithName:@"UserItems" bundle:nil];
+        self.mainStoryboard = [UIStoryboard storyboardWithName:@"Loading" bundle:nil];
     }
     else
     {
-        mainStoryboard = [UIStoryboard storyboardWithName:@"WelcomeScreens" bundle:nil];
+        self.mainStoryboard = [UIStoryboard storyboardWithName:@"WelcomeScreens" bundle:nil];
     }
     
-    rootController = [mainStoryboard instantiateInitialViewController];
+    rootController = [self.mainStoryboard instantiateInitialViewController];
     self.window.rootViewController = rootController;
     [self.window makeKeyAndVisible];
 
