@@ -136,15 +136,17 @@
     FIRDatabaseReference *usersRef = [self.ref child:@"users"];
     NSLog(@"%@", usersRef.URL);
     FIRDatabaseReference *userRef = [usersRef child:self.currentUser.key];
+    newItem.userEmail = self.currentUser.email;
+    newItem.userName = self.currentUser.name;
+    newItem.userPhoneNum = self.currentUser.phoneNumber;
+    
     [self.currentUser.listOfItems addObject:newItem];
     [userRef setValue:[self.currentUser formattedUser]];
     
     //save item to firebase
     FIRDatabaseReference *itemsRef = [self.ref child:@"items"];
     FIRDatabaseReference *itemRef = [itemsRef childByAutoId];
-    newItem.userEmail = self.currentUser.email;
-    newItem.userName = self.currentUser.name;
-    newItem.userPhoneNum = self.currentUser.phoneNumber;
+    
     //[itemRef setValue:[newItem formattedItem]];
     
     //storage images and set urls to download
