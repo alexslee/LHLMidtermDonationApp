@@ -219,7 +219,7 @@
                                 </constraints>
                             </mapView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CjX-Rr-HsS">
-                                <rect key="frame" x="61" y="487" width="253" height="160"/>
+                                <rect key="frame" x="61" y="438" width="253" height="160"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6VM-YO-3vD">
                                         <rect key="frame" x="68.5" y="62.5" width="115" height="35"/>

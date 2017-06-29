@@ -83,6 +83,38 @@
     {
         cell.itemImageView.image = currentItem.photos[0];
     }
+    else if (currentItem.photosURL.count >0)
+    {
+        cell.itemImageView.image = [UIImage imageNamed:@"placeholder"];
+        
+        UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithFrame:CGRectZero];
+        spinner.translatesAutoresizingMaskIntoConstraints = NO;
+        spinner.color = [UIColor lightGrayColor];
+        [spinner startAnimating];
+        [cell.itemImageView addSubview:spinner];
+        
+        [NSLayoutConstraint constraintWithItem:spinner
+                                     attribute:NSLayoutAttributeCenterX
+                                     relatedBy:NSLayoutRelationEqual
+                                        toItem:cell.itemImageView
+                                     attribute:NSLayoutAttributeCenterX
+                                    multiplier:1
+                                      constant:0].active = YES;
+        
+        [NSLayoutConstraint constraintWithItem:spinner
+                                     attribute:NSLayoutAttributeCenterY
+                                     relatedBy:NSLayoutRelationEqual
+                                        toItem:cell.itemImageView
+                                     attribute:NSLayoutAttributeCenterY
+                                    multiplier:1
+                                      constant:0].active = YES;
+        
+        
+        [self downloadImage:currentItem.photosURL[0] completionHandler:^(UIImage *image) {
+            cell.itemImageView.image = image;
+            [spinner stopAnimating];
+        }];
+    }
     else
     {
         cell.itemImageView.image = [UIImage imageNamed:@"placeholder"];
@@ -113,6 +145,35 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     return self.categoriesList[section];
+}
+
+#pragma mark - Helper
+
+- (void)downloadImage:(NSString *)imageURL
+    completionHandler:(void (^)(UIImage * image))completionHandler
+{
+    NSURL *url = [NSURL URLWithString:imageURL];
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+    
+    NSURLSessionDownloadTask *downloadTask = [session downloadTaskWithURL:url completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        if (error)
+        {
+            NSLog(@"error: %@", error.localizedDescription);
+            return;
+        }
+        
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            NSData *data = [NSData dataWithContentsOfURL:location];
+            UIImage * photoImage = [UIImage imageWithData:data];
+            completionHandler(photoImage);
+        }];
+        
+    }];
+    
+    [downloadTask resume];
 }
 
 #pragma mark - Navigation
