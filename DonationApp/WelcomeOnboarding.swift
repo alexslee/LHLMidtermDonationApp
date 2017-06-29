@@ -44,7 +44,7 @@ class WelcomeOnboardingViewController: UIViewController {
                                                 constant: 0)
             view.addConstraint(constraint)
         }
-        
+        skipButton.titleLabel?.textAlignment = NSTextAlignment.right
         view.bringSubview(toFront: skipButton)
     }
         
@@ -58,7 +58,7 @@ extension WelcomeOnboardingViewController: PaperOnboardingDelegate {
 //    }
 //    
     func onboardingDidTransitonToIndex(_ index: Int) {
-        
+        skipButton.titleLabel!.text = (index >= 2) ? "Login" : "Skip to Login"
     }
     
     func onboardingConfigurationItem(_ item: OnboardingContentViewItem, index: Int) {
@@ -77,6 +77,8 @@ extension WelcomeOnboardingViewController: PaperOnboardingDataSource {
         let titleFont = UIFont(name: "Nunito-Bold", size: 36.0) ?? UIFont.boldSystemFont(ofSize: 36.0)
         let descriptionFont = UIFont(name: "OpenSans-Regular", size: 14.0) ?? UIFont.systemFont(ofSize: 14.0)
         let image = UIImage(named: "placeholder")
+        let imageTwo = UIImage(named: "addItemScreenshot")
+        let imageThree = UIImage(named: "showAllItemsScreenshot")
         return [
             (image!,
              "App name here",
@@ -85,17 +87,17 @@ extension WelcomeOnboardingViewController: PaperOnboardingDataSource {
              UIColor(red:0.40, green:0.56, blue:0.71, alpha:1.00),
              UIColor.white, UIColor.white, titleFont,descriptionFont),
             
-            (image!,
+            (imageTwo!,
              "Posting items",
-             "(description here, and screenshot above)",
-             image!,
+             "Add an item, and give it a description and picture to help others get a better idea of what you're offering",
+             imageTwo!,
              UIColor(red:0.40, green:0.69, blue:0.71, alpha:1.00),
              UIColor.white, UIColor.white, titleFont,descriptionFont),
             
-            (image!,
-             "Searching for items",
-             "(description here, and screenshot above)",
-             image!,
+            (imageThree!,
+             "Viewing other listings",
+             "See other people's items via a grid or a map view",
+             imageThree!,
              UIColor(red:0.61, green:0.56, blue:0.74, alpha:1.00),
              UIColor.white, UIColor.white, titleFont,descriptionFont)
             
