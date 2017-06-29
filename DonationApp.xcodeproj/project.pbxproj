@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2A4159BFB7F0BB5CB61DA6CF /* Pods_DonationApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12EEC0A9957097DF9861FA7 /* Pods_DonationApp.framework */; };
+		4334B29D1F049FB1002970EA /* HeaderCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4334B29C1F049FB1002970EA /* HeaderCollectionReusableView.m */; };
 		43713D061F03142A00F93808 /* WelcomeScreens.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43713D051F03142A00F93808 /* WelcomeScreens.storyboard */; };
 		438AD8B01F03172500CE5E20 /* WelcomeOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438AD8AF1F03172500CE5E20 /* WelcomeOnboarding.swift */; };
 		438CF0E01F01C26100A79300 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 438CF0DF1F01C26100A79300 /* User.m */; };
@@ -33,6 +34,8 @@
 
 /* Begin PBXFileReference section */
 		058D672DC9CA9927D7AAEF54 /* Pods-DonationApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DonationApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DonationApp/Pods-DonationApp.debug.xcconfig"; sourceTree = "<group>"; };
+		4334B29B1F049FB1002970EA /* HeaderCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderCollectionReusableView.h; sourceTree = "<group>"; };
+		4334B29C1F049FB1002970EA /* HeaderCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderCollectionReusableView.m; sourceTree = "<group>"; };
 		43713D051F03142A00F93808 /* WelcomeScreens.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WelcomeScreens.storyboard; sourceTree = "<group>"; };
 		438AD8AF1F03172500CE5E20 /* WelcomeOnboarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeOnboarding.swift; sourceTree = "<group>"; };
 		438CF0DE1F01C26100A79300 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -149,6 +152,8 @@
 				438CF0E21F01C2A000A79300 /* Item.m */,
 				9C6D63E51F01CFA400ED78F0 /* UserItems */,
 				438CF0E41F01CEDE00A79300 /* ListItems.storyboard */,
+				4334B29B1F049FB1002970EA /* HeaderCollectionReusableView.h */,
+				4334B29C1F049FB1002970EA /* HeaderCollectionReusableView.m */,
 				438CF0EC1F02DCF600A79300 /* ListItemDetailedViewController.h */,
 				438CF0ED1F02DCF600A79300 /* ListItemDetailedViewController.m */,
 				438CF0E61F01CF6600A79300 /* ShowAllItemsViewController.h */,
@@ -324,6 +329,7 @@
 				438CF0EE1F02DCF600A79300 /* ListItemDetailedViewController.m in Sources */,
 				438CF0E81F01CF6600A79300 /* ShowAllItemsViewController.m in Sources */,
 				438CF0E01F01C26100A79300 /* User.m in Sources */,
+				4334B29D1F049FB1002970EA /* HeaderCollectionReusableView.m in Sources */,
 				43AD4F231F01928600D5FACC /* ViewController.m in Sources */,
 				43AD4F201F01928600D5FACC /* AppDelegate.m in Sources */,
 				9C6D63E81F01D30400ED78F0 /* ItemTableViewCell.m in Sources */,
