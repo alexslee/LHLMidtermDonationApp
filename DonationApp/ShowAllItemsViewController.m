@@ -188,12 +188,18 @@
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     Item *itemAnnotation = (Item *)annotation;
     
-    CGRect  viewRect = CGRectMake(-20, -20, 40, 40);
-    MKAnnotationView *returner = [[MKAnnotationView alloc] initWithFrame:viewRect];
+    UIImage *image = itemAnnotation.image;
+    CGSize size = CGSizeMake(50, 50);
+    
+    UIGraphicsBeginImageContext(size);
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    MKAnnotationView *returner = [[MKAnnotationView alloc] init];
+    returner.image = resizedImage;
     
     returner.contentMode = UIViewContentModeScaleAspectFit;
-    
-    returner.image = itemAnnotation.image;
     
     return returner;
 }
