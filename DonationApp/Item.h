@@ -32,6 +32,10 @@
 
 @property (weak, nonatomic) NSString *userEmail;
 
+@property (weak, nonatomic) NSString *userName;
+
+@property (weak, nonatomic) NSString *userPhoneNum;
+
 - (NSDictionary *)formattedItem;
 
 @end

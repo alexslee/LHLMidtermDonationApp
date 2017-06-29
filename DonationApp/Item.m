@@ -32,6 +32,9 @@
              @"photos":self.photosURL,
              @"latitude":[NSNumber numberWithDouble: self.location.coordinate.latitude],
              @"longitude":[NSNumber numberWithDouble: self.location.coordinate.longitude],
+             @"name":self.userName,
+             @"email":self.userEmail,
+             @"phone":self.userPhoneNum
              };
     return returnDict;
 }

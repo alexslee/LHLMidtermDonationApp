@@ -141,7 +141,9 @@
     FIRDatabaseReference *itemsRef = [self.ref child:@"items"];
     FIRDatabaseReference *itemRef = [itemsRef childByAutoId];
     newItem.userEmail = self.currentUser.email;
-    [itemRef setValue:[newItem formattedItem]];
+    newItem.userName = self.currentUser.name;
+    newItem.userPhoneNum = self.currentUser.phoneNumber;
+    //[itemRef setValue:[newItem formattedItem]];
     
     //storage images and set urls to download
     FIRStorageReference *storageRef = [[FIRStorage storage] reference];

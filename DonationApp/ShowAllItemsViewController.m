@@ -51,6 +51,10 @@
                 item.image = item.photos[0];
             //}
             
+            item.userName = [itemDict objectForKey:@"name"];
+            item.userPhoneNum = [itemDict objectForKey:@"phone"];
+            item.userEmail = [itemDict objectForKey:@"email"];
+            
             if ([self.items objectForKey:item.category] == nil) {
                 //if the item's category doesn't exist yet, create a new key-value pair in the items dictionary to display
                 [self.items setObject:[[NSMutableArray alloc] init] forKey:item.category];
@@ -183,8 +187,14 @@
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     Item *itemAnnotation = (Item *)annotation;
-    MKAnnotationView *returner = [[MKAnnotationView alloc] init];
+    
+    CGRect  viewRect = CGRectMake(-20, -20, 40, 40);
+    MKAnnotationView *returner = [[MKAnnotationView alloc] initWithFrame:viewRect];
+    
+    returner.contentMode = UIViewContentModeScaleAspectFit;
+    
     returner.image = itemAnnotation.image;
+    
     return returner;
 }
 

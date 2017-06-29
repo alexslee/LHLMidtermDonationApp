@@ -47,7 +47,13 @@
 }
 
 - (IBAction)contactPressed:(UIButton *)sender {
-    
+    NSString *userInfoString = [NSString stringWithFormat:@"Here's the owner's contact info:\nName: %@\nPhone Number: %@\nEmail: %@",self.item.userName,self.item.userPhoneNum,self.item.userEmail];
+    UIAlertController *contactInfo = [UIAlertController alertControllerWithTitle:@"Contact the owner" message:userInfoString preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
+    [contactInfo addAction:okAction];
+    [self presentViewController:contactInfo animated:YES completion:nil];
 }
 
 
