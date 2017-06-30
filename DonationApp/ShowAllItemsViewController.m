@@ -18,6 +18,7 @@
 @property (strong, nonatomic) UIBarButtonItem *buttonItem;
 @property (strong, nonatomic) Item *detailItemToDisplay;
 //@property (strong, nonatomic) NSMutableSet *categoriesList;
+@property (nonatomic) BOOL seenMapYet;
 
 @end
 
@@ -49,11 +50,10 @@
             NSNumber *latitude = [itemDict objectForKey:@"latitude"];
             NSNumber *longitude = [itemDict objectForKey:@"longitude"];
             item.coordinate = CLLocationCoordinate2DMake([latitude floatValue], [longitude floatValue]);
-            //if ([item.photosURL count] == 0) {
+            if ([item.photosURL count] == 0) {
                 [item.photos addObject:[UIImage imageNamed:@"placeholder"]];
-                item.image = item.photos[0];
-            //}
-            
+                //item.image = item.photos[0];
+            }
             item.userName = [itemDict objectForKey:@"name"];
             item.userPhoneNum = [itemDict objectForKey:@"phone"];
             item.userEmail = [itemDict objectForKey:@"email"];
@@ -82,6 +82,7 @@
     
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
+    self.seenMapYet = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -161,50 +162,24 @@
     height.active = YES;
     self.mapView.delegate = self;
     self.mapView.hidden = YES;
-    if ([self.itemsToDisplay count] > 0) {
-        [self.mapView addAnnotations:self.itemsToDisplay];
-    }
+    
+    self.mapView.showsUserLocation = YES;
     
 }
 
 - (void)toggleMapView:(id)sender {
     self.mapView.hidden = !self.mapView.hidden;
     self.buttonItem.title = (self.mapView.isHidden) ? @"Map View" : @"List View";
-}
-
-- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
-    view.canShowCallout = YES;
-//    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-//    //[view addSubview:imageView];
-//    
-//    Item *annotation = view.annotation;
-//    
-//    view.leftCalloutAccessoryView = imageView;
-//    imageView.image = annotation.image;
-//
-//    CGRect frame = view.frame;
-//    imageView.contentMode = UIViewContentModeScaleAspectFill;
-//    imageView.layer.masksToBounds = YES;
-//    imageView.frame = CGRectMake(-frame.size.width/2, -frame.size.height-7, frame.size.height, frame.size.height);
-}
-
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    Item *itemAnnotation = (Item *)annotation;
-    
-    UIImage *image = itemAnnotation.image;
-    CGSize size = CGSizeMake(50, 50);
-    
-    UIGraphicsBeginImageContext(size);
-    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
-    UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    MKAnnotationView *returner = [[MKAnnotationView alloc] init];
-    returner.image = resizedImage;
-    
-    returner.contentMode = UIViewContentModeScaleAspectFit;
-    
-    return returner;
+    if (!self.seenMapYet) {
+        self.seenMapYet = YES;
+        if ([self.itemsToDisplay count] > 0) {
+            [self.mapView addAnnotations:self.itemsToDisplay];
+        }
+        CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(49.283060, -123.110633);
+        MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(coord, 500, 500);
+        MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:viewRegion];
+        [self.mapView setRegion:adjustedRegion animated:YES];
+    }
 }
 
 #pragma mark - Helper
@@ -272,7 +247,7 @@
     NSArray *sections = [self.items allKeys];
     NSString *section = [sections objectAtIndex:indexPath.section];
     Item *toDisplay = [[self.items objectForKey:section] objectAtIndex:indexPath.row];
-    if (toDisplay) {
+    //if (toDisplay) {
         cell.titleLabel.text = toDisplay.title;
         
         if (toDisplay.photosURL.count > 0)
@@ -308,7 +283,7 @@
         {
             cell.imageView.image = [UIImage imageNamed:@"placeholder"];
         }
-    }
+    //}
     
     return cell;
 }
@@ -322,7 +297,7 @@
     
     NSArray *photoURLs = self.detailItemToDisplay.photosURL;
     if ([photoURLs count] > 0 && self.detailItemToDisplay.photos.count < self.detailItemToDisplay.photosURL.count) {
-        [self.detailItemToDisplay.photos removeObjectAtIndex:0];
+        //[self.detailItemToDisplay.photos removeObjectAtIndex:0];
         for (NSString *url in photoURLs) {
             NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: url]];
             [self.detailItemToDisplay.photos addObject:[UIImage imageWithData: imageData]];
