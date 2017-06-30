@@ -34,6 +34,9 @@
     
     [itemsReference observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSDictionary *itemsDictionary = snapshot.value;
+        if (itemsDictionary == nil || itemsDictionary.count == 0) {
+            return;
+        }
         for (NSString *key in itemsDictionary.allKeys) {
             
             NSDictionary *itemDict = [itemsDictionary objectForKey:key];
@@ -240,6 +243,9 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    if ([self.items.allKeys count] == 0) {
+        return 0;
+    }
     NSString *sectionName = [[self.items allKeys] objectAtIndex:section];
     return [[self.items objectForKey:sectionName] count];
 }
@@ -248,6 +254,9 @@
     UICollectionReusableView *reusable = nil;
     if (kind == UICollectionElementKindSectionHeader) {
         HeaderCollectionReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header" forIndexPath:indexPath];
+        if ([self.items.allKeys count] == 0) {
+            return reusable;
+        }
         header.sectionLabel.text = [[self.items allKeys] objectAtIndex:indexPath.section];
         reusable = header;
     }
@@ -257,6 +266,9 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ListItemsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    if ([self.items.allKeys count] == 0) {
+        return cell;
+    }
     NSArray *sections = [self.items allKeys];
     NSString *section = [sections objectAtIndex:indexPath.section];
     Item *toDisplay = [[self.items objectForKey:section] objectAtIndex:indexPath.row];
@@ -302,6 +314,9 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if ([self.items.allKeys count] == 0) {
+        return;
+    }
     NSString *sectionName = [[self.items allKeys] objectAtIndex:indexPath.section];
     self.detailItemToDisplay = [[self.items objectForKey:sectionName] objectAtIndex:indexPath.row];
     
