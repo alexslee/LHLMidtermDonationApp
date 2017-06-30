@@ -206,8 +206,6 @@
     FIRDatabaseReference *itemsRef = [self.ref child:@"items"];
     FIRDatabaseReference *itemRef = [itemsRef childByAutoId];
     
-    //[itemRef setValue:[newItem formattedItem]];
-    
     //storage images and set urls to download
     FIRStorageReference *storageRef = [[FIRStorage storage] reference];
     FIRStorageMetadata *metaData = [[FIRStorageMetadata alloc] init];
@@ -224,10 +222,11 @@
                         // Uh-oh, an error occurred!
                     } else {
                         // Metadata contains file metadata such as size, content-type, and download URL.
-                        [newItem.photosURL addObject:metadata.downloadURL.absoluteString];
+                        Item *lastItem = self.currentUser.listOfItems[self.currentUser.listOfItems.count - 1];
+                        [lastItem.photosURL addObject:metadata.downloadURL.absoluteString];
 
                         // Update data in items and user
-                        [itemRef setValue:[newItem formattedItem]];
+                        [itemRef setValue:[lastItem formattedItem]];
                         [userRef setValue:[self.currentUser formattedUser]];
                     }
                 }];
