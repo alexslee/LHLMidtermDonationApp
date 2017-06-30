@@ -76,20 +76,20 @@ extension WelcomeOnboardingViewController: PaperOnboardingDataSource {
     func onboardingItemAtIndex(_ index: Int) -> OnboardingItemInfo {
         let titleFont = UIFont(name: "Nunito-Bold", size: 36.0) ?? UIFont.boldSystemFont(ofSize: 36.0)
         let descriptionFont = UIFont(name: "OpenSans-Regular", size: 14.0) ?? UIFont.systemFont(ofSize: 14.0)
-        let image = UIImage(named: "placeholder")
+        let image = UIImage(named: "donatesplash")
         let imageTwo = UIImage(named: "addItemScreenshot")
         let imageThree = UIImage(named: "showAllItemsScreenshot")
         return [
             (image!,
-             "App name here",
-             "Post items you don't want/need anymore, and give other items a new home",
+             "Donate",
+             "You can help others. And vice versa.",
              image!,
              UIColor(red:0.40, green:0.56, blue:0.71, alpha:1.00),
              UIColor.white, UIColor.white, titleFont,descriptionFont),
             
             (imageTwo!,
              "Posting items",
-             "Add an item, and give it a description and picture to help others get a better idea of what you're offering",
+             "Add an item, give it a description and pictures to help others get a better idea of what you're offering",
              imageTwo!,
              UIColor(red:0.40, green:0.69, blue:0.71, alpha:1.00),
              UIColor.white, UIColor.white, titleFont,descriptionFont),
