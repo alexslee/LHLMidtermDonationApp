@@ -35,7 +35,7 @@
     
     [itemsReference observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSDictionary *itemsDictionary = snapshot.value;
-        if (itemsDictionary == nil || itemsDictionary.count == 0) {
+        if (itemsDictionary == nil || [itemsDictionary isKindOfClass:[NSNull class]] || itemsDictionary.allKeys.count == 0) {
             return;
         }
         for (NSString *key in itemsDictionary.allKeys) {
@@ -214,10 +214,16 @@
 #pragma mark - collection view methods
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    if ([self.items allKeys] == nil) {
+        return 0;
+    }
     return [[self.items allKeys] count];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    if ([self.items allKeys] == nil) {
+        return 0;
+    }
     if ([self.items.allKeys count] == 0) {
         return 0;
     }
@@ -229,6 +235,9 @@
     UICollectionReusableView *reusable = nil;
     if (kind == UICollectionElementKindSectionHeader) {
         HeaderCollectionReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header" forIndexPath:indexPath];
+        if ([self.items allKeys] == nil) {
+            return reusable;
+        }
         if ([self.items.allKeys count] == 0) {
             return reusable;
         }
@@ -241,6 +250,9 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ListItemsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    if ([self.items allKeys] == nil) {
+        return cell;
+    }
     if ([self.items.allKeys count] == 0) {
         return cell;
     }
@@ -289,6 +301,9 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if ([self.items allKeys] == nil) {
+        return;
+    }
     if ([self.items.allKeys count] == 0) {
         return;
     }

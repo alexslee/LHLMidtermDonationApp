@@ -314,12 +314,12 @@
                   moduleName = "DonationApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexlee/Desktop/lighthouse/weekFive/DonationApp/DonationApp/ShowAllItemsViewController.m"
-                  timestampString = "520471805.436203"
+                  timestampString = "520476760.556913"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "40"
-                  endingLineNumber = "40"
-                  offsetFromSymbolStart = "161">
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "193">
                </Location>
                <Location
                   shouldBeEnabled = "No"
@@ -329,12 +329,12 @@
                   moduleName = "DonationApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexlee/Desktop/lighthouse/weekFive/DonationApp/DonationApp/ShowAllItemsViewController.m"
-                  timestampString = "520471805.438384"
+                  timestampString = "520476760.558725"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "40"
-                  endingLineNumber = "40"
-                  offsetFromSymbolStart = "169">
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "201">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -374,7 +374,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DonationApp/ShowAllItemsViewController.m"
@@ -704,6 +704,22 @@
             startingLineNumber = "227"
             endingLineNumber = "227"
             landmarkName = "-didSaveNewItem:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DonationApp/ShowAllItemsViewController.m"
+            timestampString = "520476824.595477"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
